@@ -1,24 +1,144 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="6Ye-5g-PxG">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="tne-QT-ifu">
+        <!--Currency-->
+        <scene sceneID="4cQ-ZV-ZNY">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                <viewController id="7aU-AG-x4E" userLabel="Currency" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="fkI-Z2-iE5">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <viewLayoutGuide key="safeArea" id="Yd5-5y-u75"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Item 2" id="vSU-Wo-FpP"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ohq-G8-m9l" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="522" y="258"/>
+        </scene>
+        <!--Translator-->
+        <scene sceneID="n0d-zv-y5j">
+            <objects>
+                <viewController id="PAf-ie-2P1" userLabel="Translator" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="NNs-nD-gVQ">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="PJd-vB-2ro"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item 2" id="RqN-RZ-jVf"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pnh-7b-kq5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1380" y="-141"/>
+        </scene>
+        <!--Weather-->
+        <scene sceneID="oby-8j-8A7">
+            <objects>
+                <viewController id="fI5-sM-Bhp" userLabel="Weather" customClass="WeatherViewController" customModule="Le_Baluchon" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="wnJ-WP-Tyk">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="w7L-49-YLw">
+                                <rect key="frame" x="20" y="74" width="374" height="581"/>
+                                <subviews>
+                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x7l-8D-wkl" userLabel="Weather Module Top" customClass="WeatherModule" customModule="Le_Baluchon" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="280.5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="x7l-8D-wkl" secondAttribute="height" multiplier="4:3" id="ZW9-vk-2a0"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="mainTemperature" value="9"/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="30"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bco-4a-q6s" customClass="WeatherModule" customModule="Le_Baluchon" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="300.5" width="374" height="280.5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="bco-4a-q6s" secondAttribute="height" multiplier="4:3" id="Lap-BO-Q5O"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="mainTemperature" value="5"/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="30"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                </subviews>
+                            </stackView>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="City name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YEM-dv-OWk">
+                                <rect key="frame" x="160.5" y="687" width="93" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" spellCheckingType="no" textContentType="name"/>
+                            </textField>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="4jS-Y1-h40">
+                                <rect key="frame" x="197" y="729" width="20" height="20"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="ec0-do-F1Z"/>
+                        <color key="backgroundColor" name="Background"/>
+                        <constraints>
+                            <constraint firstItem="4jS-Y1-h40" firstAttribute="top" secondItem="YEM-dv-OWk" secondAttribute="bottom" constant="8" symbolic="YES" id="78X-a3-qcv"/>
+                            <constraint firstItem="w7L-49-YLw" firstAttribute="leading" secondItem="ec0-do-F1Z" secondAttribute="leading" constant="20" id="UzX-9e-y63"/>
+                            <constraint firstItem="YEM-dv-OWk" firstAttribute="top" secondItem="w7L-49-YLw" secondAttribute="bottom" constant="32" id="aFd-G5-bRo"/>
+                            <constraint firstItem="4jS-Y1-h40" firstAttribute="centerX" secondItem="wnJ-WP-Tyk" secondAttribute="centerX" id="aRS-68-1co"/>
+                            <constraint firstItem="w7L-49-YLw" firstAttribute="centerX" secondItem="ec0-do-F1Z" secondAttribute="centerX" id="bNx-4x-NZO"/>
+                            <constraint firstItem="YEM-dv-OWk" firstAttribute="centerX" secondItem="wnJ-WP-Tyk" secondAttribute="centerX" id="cfd-M9-SZA"/>
+                            <constraint firstItem="ec0-do-F1Z" firstAttribute="trailing" secondItem="w7L-49-YLw" secondAttribute="trailing" constant="20" id="uSk-hb-J9w"/>
+                            <constraint firstItem="w7L-49-YLw" firstAttribute="top" secondItem="ec0-do-F1Z" secondAttribute="top" constant="30" id="zex-Vx-AUI"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item 1" selectedImage="cloud.sun.fill" catalog="system" id="bCN-1r-PLb"/>
+                    <connections>
+                        <outlet property="cityField" destination="YEM-dv-OWk" id="Aaf-ua-a8B"/>
+                        <outlet property="spinner" destination="4jS-Y1-h40" id="1ls-RO-IE0"/>
+                        <outlet property="weatherModuleBottom" destination="bco-4a-q6s" id="BTz-hw-u9B"/>
+                        <outlet property="weatherModuleTop" destination="x7l-8D-wkl" id="TS3-Vc-s6K"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xMV-yo-5Ul" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="521.73913043478262" y="-473.4375"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="leO-im-kiE">
+            <objects>
+                <tabBarController id="6Ye-5g-PxG" customClass="ViewController" customModule="Le_Baluchon" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="6Fv-Eo-WV2">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="fI5-sM-Bhp" kind="relationship" relationship="viewControllers" id="jBY-3T-7QW"/>
+                        <segue destination="7aU-AG-x4E" kind="relationship" relationship="viewControllers" id="woH-cU-dzh"/>
+                        <segue destination="PAf-ie-2P1" kind="relationship" relationship="viewControllers" id="Daw-fu-Ybu"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="daM-cM-3he" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-499" y="-140"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="cloud.sun.fill" catalog="system" width="128" height="95"/>
+        <namedColor name="Background">
+            <color red="0.23499999940395355" green="0.0" blue="0.20399999618530273" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>
