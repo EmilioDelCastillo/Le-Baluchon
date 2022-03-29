@@ -21,5 +21,7 @@
 			</array>
 		</dict>
 	</dict>
+	<key>BASE_HOST</key>
+	<string>api.openweathermap.org</string>
 </dict>
 </plist>
