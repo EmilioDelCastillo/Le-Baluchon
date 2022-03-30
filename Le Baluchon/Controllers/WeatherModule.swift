@@ -47,16 +47,24 @@ class WeatherModule: UIView {
     @IBInspectable
     public var mainTemperature: Int = 0 {
         didSet {
-            let attributes: [NSMutableAttributedString.Key: Any] = [.font: UIFont(name: "ArialRoundedMTBold", size: 100)!,
-                                                                    .foregroundColor: UIColor.white]
+            /// The number part of the displayed temperature
+            let baseAttributes: [NSMutableAttributedString.Key: Any] = [
+                .font: UIFont(name: "ArialRoundedMTBold", size: 100)!,
+                .foregroundColor: UIColor.white
+            ]
+            
+            /// The "°X" part of the displayed temperature
+            let unitAttributes: [NSMutableAttributedString.Key: Any] = [
+                .baselineOffset: 45,
+                .font: UIFont(name: "ArialRoundedMTBold", size: 35)!,
+                .foregroundColor: UIColor(named: "Detail Orange", in: Bundle(for: WeatherModule.self), compatibleWith: nil)!
+            ]
+            
             let baseStringSize = "\(mainTemperature)".count
 
-            let attributedString = NSMutableAttributedString(string: "\(mainTemperature)°C", attributes: attributes)
-
-            attributedString.addAttribute(.baselineOffset, value: 45, range: NSRange(location: baseStringSize, length: 2))
-            attributedString.addAttribute(.font, value: UIFont(name: "ArialRoundedMTBold", size: 35)!, range: NSRange(location: baseStringSize, length: 2))
-            attributedString.addAttribute(.foregroundColor, value: UIColor(named: "Detail Orange", in: Bundle(for: AppDelegate.self), compatibleWith: nil)!, range: NSRange(location: baseStringSize, length: 2))
-
+            let attributedString = NSMutableAttributedString(string: "\(mainTemperature)°C", attributes: baseAttributes)
+            attributedString.addAttributes(unitAttributes, range: NSRange(location: baseStringSize, length: 2))
+            
             mainTemperatureLabel.attributedText = attributedString
         }
     }
@@ -81,7 +89,7 @@ class WeatherModule: UIView {
     
     public var minMax: (Int, Int)! {
         didSet {
-            minMaxLabel.text = "min : \(minMax.0) | max : \(minMax.1)"
+            minMaxLabel.text = "min : \(minMax.0)° | max : \(minMax.1)°"
         }
     }
     
