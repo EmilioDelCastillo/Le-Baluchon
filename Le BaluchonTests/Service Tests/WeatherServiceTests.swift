@@ -10,11 +10,16 @@ import XCTest
 
 class WeatherServiceTests: XCTestCase {
     private var subject: WeatherService!
-    private var session = MockURLSession()
+    private var session = MockURLProtocol()
     
     override func setUp() {
         super.setUp()
-        subject = WeatherService(session: session)
+        
+        let configuration = URLSessionConfiguration.default
+        configuration.protocolClasses = [MockURLProtocol.self]
+        let urlSession = URLSession(configuration: configuration)
+        
+        subject = WeatherService(session: urlSession)
     }
     
     func testGetWeatherFromCityName() async {

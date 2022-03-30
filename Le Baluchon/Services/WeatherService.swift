@@ -8,10 +8,10 @@
 import Foundation
 
 class WeatherService {
-    private let session: URLSessionProtocol!
-    private let baseService: BaseService!
+    private let session: URLSession
+    private let baseService: BaseService
     
-    init(session: URLSessionProtocol = URLSession.shared) {
+    init(session: URLSession = URLSession.shared) {
         self.session = session
         baseService = BaseService(session: session)
     }
@@ -20,9 +20,9 @@ class WeatherService {
         
         do {
             let location = try await getLocation(from: city)
-            let request = URLRequest(url: URLFactory.weather(latitude: location.lat, longitude: location.lon))
+            let url = URLFactory.weather(latitude: location.lat, longitude: location.lon)
             
-            let weather: Weather = try await baseService.fetchData(from: request)
+            let weather: Weather = try await baseService.fetchData(from: url)
             return weather
             
         } catch {
@@ -32,10 +32,10 @@ class WeatherService {
     
     private func getLocation(from name: String) async throws -> Location {
         
-        let request = URLRequest(url: URLFactory.geo(for: name, limit: 1))
+        let url = URLFactory.geo(for: name, limit: 1)
         
         do {
-            let location: [Location] = try await baseService.fetchData(from: request)
+            let location: [Location] = try await baseService.fetchData(from: url)
             if location.isEmpty {
                 throw WeatherServiceError.cityNotFound
             }

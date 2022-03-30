@@ -9,19 +9,19 @@ import Foundation
 
 struct BaseService {
     
-    let session: URLSessionProtocol
+    let session: URLSession
     
-    init(session: URLSessionProtocol = URLSession(configuration: .default )) {
+    init(session: URLSession = URLSession.shared) {
         self.session = session
     }
     
     /// Fetches data from an url.
     /// The data must be described with the object
     /// - Returns: An object full of data lmao
-    public func fetchData<T: Decodable>(from url: URLRequest) async throws -> T {
+    public func fetchData<T: Decodable>(from url: URL) async throws -> T {
 
         do {
-            let (data, _) = try await session.data(for: url, delegate: nil)
+            let (data, _) = try await session.data(from: url)
             let decoder = JSONDecoder()
             decoder.keyDecodingStrategy = .convertFromSnakeCase
             return try decoder.decode(T.self, from: data)
