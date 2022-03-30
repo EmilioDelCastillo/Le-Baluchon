@@ -14,6 +14,7 @@ enum BaluchonError: Error {
 
 enum BaseServiceError: Error {
     case networkError
+    case internalError
 }
 
 enum WeatherServiceError: Error {

@@ -26,6 +26,25 @@ struct BaseService {
             decoder.keyDecodingStrategy = .convertFromSnakeCase
             return try decoder.decode(T.self, from: data)
             
+        } catch let DecodingError.dataCorrupted(context) {
+            print(context)
+            throw BaseServiceError.internalError
+            
+        } catch let DecodingError.keyNotFound(key, context) {
+            print("Key '\(key)' not found:", context.debugDescription)
+            print("codingPath:", context.codingPath)
+            throw BaseServiceError.internalError
+            
+        } catch let DecodingError.valueNotFound(value, context) {
+            print("Value '\(value)' not found:", context.debugDescription)
+            print("codingPath:", context.codingPath)
+            throw BaseServiceError.internalError
+            
+        } catch let DecodingError.typeMismatch(type, context)  {
+            print("Type '\(type)' mismatch:", context.debugDescription)
+            print("codingPath:", context.codingPath)
+            throw BaseServiceError.internalError
+            
         } catch {
             throw BaseServiceError.networkError
         }
