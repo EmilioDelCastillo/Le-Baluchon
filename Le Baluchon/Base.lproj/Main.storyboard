@@ -58,10 +58,10 @@
                                             <constraint firstAttribute="width" secondItem="x7l-8D-wkl" secondAttribute="height" multiplier="4:3" id="ZW9-vk-2a0"/>
                                         </constraints>
                                         <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="string" keyPath="mainTemperature" value="9"/>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                 <real key="value" value="30"/>
                                             </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="editable" value="NO"/>
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bco-4a-q6s" customClass="WeatherModule" customModule="Le_Baluchon" customModuleProvider="target">
@@ -70,10 +70,10 @@
                                             <constraint firstAttribute="width" secondItem="bco-4a-q6s" secondAttribute="height" multiplier="4:3" id="Lap-BO-Q5O"/>
                                         </constraints>
                                         <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="string" keyPath="mainTemperature" value="5"/>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                 <real key="value" value="30"/>
                                             </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="editable" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                 </subviews>
@@ -110,7 +110,64 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xMV-yo-5Ul" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="521.73913043478262" y="-473.4375"/>
+            <point key="canvasLocation" x="522" y="-908"/>
+        </scene>
+        <!--Weather Settings View Controller-->
+        <scene sceneID="7yZ-vR-JEh">
+            <objects>
+                <viewController storyboardIdentifier="weatherSettings" id="Awv-dU-j7y" customClass="WeatherSettingsViewController" customModule="Le_Baluchon" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="omT-hw-3cf">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="6AI-9I-JBx">
+                                <rect key="frame" x="20" y="105" width="374" height="717"/>
+                                <color key="backgroundColor" name="Background Light"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" id="6ZK-bh-wcJ">
+                                        <rect key="frame" x="0.0" y="50" width="374" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="6ZK-bh-wcJ" id="6LA-Bz-Xno">
+                                            <rect key="frame" x="0.0" y="0.0" width="374" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" name="Background Light"/>
+                                    </tableViewCell>
+                                </prototypes>
+                                <sections/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="30"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Weather Settings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WME-45-TEF">
+                                <rect key="frame" x="20" y="64" width="131.5" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" name="Detail Orange"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="hOA-xx-KeG"/>
+                        <color key="backgroundColor" name="Background"/>
+                        <constraints>
+                            <constraint firstItem="hOA-xx-KeG" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="WME-45-TEF" secondAttribute="trailing" id="0zX-iO-zaz"/>
+                            <constraint firstItem="6AI-9I-JBx" firstAttribute="leading" secondItem="hOA-xx-KeG" secondAttribute="leading" constant="20" id="5jG-UZ-Qbt"/>
+                            <constraint firstItem="hOA-xx-KeG" firstAttribute="bottom" secondItem="6AI-9I-JBx" secondAttribute="bottom" constant="20" id="Ba1-xQ-SrN"/>
+                            <constraint firstItem="6AI-9I-JBx" firstAttribute="top" secondItem="WME-45-TEF" secondAttribute="bottom" constant="20" id="H9v-X6-gjk"/>
+                            <constraint firstItem="WME-45-TEF" firstAttribute="top" secondItem="omT-hw-3cf" secondAttribute="topMargin" constant="20" id="gyr-HI-oOu"/>
+                            <constraint firstItem="WME-45-TEF" firstAttribute="leading" secondItem="omT-hw-3cf" secondAttribute="leadingMargin" id="rac-qq-KM0"/>
+                            <constraint firstItem="hOA-xx-KeG" firstAttribute="trailing" secondItem="6AI-9I-JBx" secondAttribute="trailing" constant="20" id="wBC-sc-LuE"/>
+                        </constraints>
+                    </view>
+                    <modalPageSheetSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="tableView" destination="6AI-9I-JBx" id="PbN-eS-v9b"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lpI-Ba-M4I" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1378.2608695652175" y="-908.03571428571422"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="leO-im-kiE">
@@ -135,7 +192,13 @@
     <resources>
         <image name="cloud.sun.fill" catalog="system" width="128" height="95"/>
         <namedColor name="Background">
-            <color red="0.23499999940395355" green="0.0" blue="0.20399999618530273" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.049265839159999998" green="0.093488775189999998" blue="0.1309689581" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Background Light">
+            <color red="0.204539001" green="0.28805911540000001" blue="0.40027320379999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Detail Orange">
+            <color red="1" green="0.72200000286102295" blue="0.28999999165534973" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

@@ -7,6 +7,10 @@
 
 import UIKit
 
+@objc protocol WeatherModuleDelegete {
+    @objc optional func didOpenSettings()
+}
+
 @IBDesignable
 class WeatherModule: UIView {
     @IBOutlet private weak var contentView: UIView!
@@ -47,6 +51,15 @@ class WeatherModule: UIView {
     }
     
     @IBInspectable
+    public var editable: Bool = false {
+        didSet {
+            editButton?.isHidden = !editable
+        }
+    }
+    
+    public weak var delegate: WeatherModuleDelegete?
+    
+    /// The number part of the displayed temperature
     public var mainTemperature: Int = 0 {
         didSet {
             mainTemperatureLabel.text = "\(mainTemperature)"
@@ -88,4 +101,9 @@ class WeatherModule: UIView {
             cityNameLabel.text = cityName
         }
     }
+    
+    @IBAction func openSettings(_ sender: UIButton) {
+        delegate?.didOpenSettings?()
+    }
+    
 }
