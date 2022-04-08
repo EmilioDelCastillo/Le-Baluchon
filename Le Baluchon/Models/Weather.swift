@@ -70,3 +70,8 @@ struct WeatherItem: Decodable {
     var description: String
     var icon: String
 }
+
+enum TemperatureUnit: String {
+    case celcius = "°C"
+    case farenheit = "°F"
+}

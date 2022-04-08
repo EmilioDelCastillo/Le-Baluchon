@@ -8,11 +8,16 @@
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WeatherModule" customModule="Le_Baluchon" customModuleProvider="target">
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="boolean" keyPath="editable" value="NO"/>
+            </userDefinedRuntimeAttributes>
             <connections>
                 <outlet property="cityNameLabel" destination="w7r-Vt-WQV" id="OdI-Tt-8LY"/>
                 <outlet property="contentView" destination="iN0-l3-epB" id="F80-jV-xCW"/>
+                <outlet property="editButton" destination="MjR-QX-U0i" id="Lec-Jg-BXa"/>
                 <outlet property="humidityLabel" destination="FxO-Vo-4Uu" id="Pme-8E-fZ3"/>
                 <outlet property="mainTemperatureLabel" destination="OHX-a9-ciO" id="Gd1-Nh-dnt"/>
+                <outlet property="mainUnitLabel" destination="UzL-nm-eih" id="s2L-Aw-WSh"/>
                 <outlet property="minMaxLabel" destination="9Q3-t6-5e2" id="cu4-5y-UjZ"/>
                 <outlet property="pressureLabel" destination="b7c-es-cle" id="zL6-at-mqP"/>
                 <outlet property="windLabel" destination="Rju-fT-QJx" id="Niz-Qj-9cZ"/>
@@ -24,7 +29,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New York" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w7r-Vt-WQV" userLabel="City Name">
-                    <rect key="frame" x="30" y="20" width="102.5" height="37"/>
+                    <rect key="frame" x="30" y="20" width="102.5" height="30"/>
                     <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
@@ -58,36 +63,40 @@
                         </label>
                     </subviews>
                 </stackView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="OHX-a9-ciO" userLabel="Main Temperature">
-                    <rect key="frame" x="30" y="49" width="160" height="176"/>
-                    <attributedString key="attributedText">
-                        <fragment content="25">
-                            <attributes>
-                                <color key="NSColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <font key="NSFont" size="100" name="ArialRoundedMTBold"/>
-                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                            </attributes>
-                        </fragment>
-                        <fragment content="°C">
-                            <attributes>
-                                <color key="NSColor" red="1" green="0.72156862745098038" blue="0.28996484458041027" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <font key="NSFont" size="36" name="ArialRoundedMTBold"/>
-                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                            </attributes>
-                        </fragment>
-                    </attributedString>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="25" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="OHX-a9-ciO" userLabel="Main Temperature">
+                    <rect key="frame" x="30" y="79" width="119" height="116"/>
+                    <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="100"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="°C" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UzL-nm-eih">
+                    <rect key="frame" x="157" y="79" width="40" height="41"/>
+                    <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="35"/>
+                    <color key="textColor" red="1" green="0.72156862749999995" blue="0.28996484459999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MjR-QX-U0i" userLabel="Settings">
+                    <rect key="frame" x="140.5" y="19.5" width="43.5" height="31"/>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="plain" image="ellipsis" catalog="system">
+                        <color key="baseForegroundColor" name="Detail Orchid"/>
+                    </buttonConfiguration>
+                    <connections>
+                        <action selector="openSettings:" destination="-1" eventType="touchUpInside" id="HxQ-08-8fk"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" name="Background Light"/>
             <constraints>
                 <constraint firstItem="OHX-a9-ciO" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="30" id="4hS-Ze-fiq"/>
+                <constraint firstItem="MjR-QX-U0i" firstAttribute="leading" secondItem="w7r-Vt-WQV" secondAttribute="trailing" constant="8" symbolic="YES" id="7BO-iU-dZu"/>
+                <constraint firstItem="UzL-nm-eih" firstAttribute="top" secondItem="OHX-a9-ciO" secondAttribute="top" id="8hr-22-EIN"/>
                 <constraint firstItem="9Q3-t6-5e2" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="30" id="HEQ-zT-0Eg"/>
+                <constraint firstItem="UzL-nm-eih" firstAttribute="leading" secondItem="OHX-a9-ciO" secondAttribute="trailing" constant="8" symbolic="YES" id="LQO-Av-D5G"/>
+                <constraint firstItem="MjR-QX-U0i" firstAttribute="centerY" secondItem="w7r-Vt-WQV" secondAttribute="centerY" id="SCC-6x-okQ"/>
                 <constraint firstAttribute="trailing" secondItem="Ohp-mA-DdT" secondAttribute="trailing" constant="30.5" id="Wf8-kM-G5J"/>
                 <constraint firstItem="Ohp-mA-DdT" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="eSt-a9-zhT"/>
                 <constraint firstItem="OHX-a9-ciO" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="eUc-h1-2wG"/>
-                <constraint firstItem="9Q3-t6-5e2" firstAttribute="top" secondItem="OHX-a9-ciO" secondAttribute="bottom" constant="8" symbolic="YES" id="hcm-6l-pHJ"/>
-                <constraint firstItem="w7r-Vt-WQV" firstAttribute="bottom" secondItem="OHX-a9-ciO" secondAttribute="top" constant="8" symbolic="YES" id="mcx-Hk-F7k"/>
                 <constraint firstItem="w7r-Vt-WQV" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="30" id="nMW-xS-qD5"/>
                 <constraint firstAttribute="bottom" secondItem="9Q3-t6-5e2" secondAttribute="bottom" constant="20.5" id="y06-ba-JCe"/>
                 <constraint firstItem="w7r-Vt-WQV" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="20" symbolic="YES" id="yoN-UO-1AI"/>
@@ -97,8 +106,12 @@
         </view>
     </objects>
     <resources>
+        <image name="ellipsis" catalog="system" width="128" height="37"/>
         <namedColor name="Background Light">
-            <color red="0.37999999523162842" green="0.0" blue="0.36100000143051147" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.204539001" green="0.28805911540000001" blue="0.40027320379999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Detail Orchid">
+            <color red="0.87800002098083496" green="0.48199999332427979" blue="0.87800002098083496" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

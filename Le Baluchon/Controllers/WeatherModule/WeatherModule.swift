@@ -16,6 +16,8 @@ class WeatherModule: UIView {
     @IBOutlet private weak var pressureLabel: UILabel!
     @IBOutlet private weak var windLabel: UILabel!
     @IBOutlet private weak var mainTemperatureLabel: UILabel!
+    @IBOutlet private weak var mainUnitLabel: UILabel!
+    @IBOutlet private weak var editButton: UIButton!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -47,25 +49,13 @@ class WeatherModule: UIView {
     @IBInspectable
     public var mainTemperature: Int = 0 {
         didSet {
-            /// The number part of the displayed temperature
-            let baseAttributes: [NSMutableAttributedString.Key: Any] = [
-                .font: UIFont(name: "ArialRoundedMTBold", size: 100)!,
-                .foregroundColor: UIColor.white
-            ]
-            
-            /// The "°X" part of the displayed temperature
-            let unitAttributes: [NSMutableAttributedString.Key: Any] = [
-                .baselineOffset: 45,
-                .font: UIFont(name: "ArialRoundedMTBold", size: 35)!,
-                .foregroundColor: UIColor(named: "Detail Orange", in: Bundle(for: WeatherModule.self), compatibleWith: nil)!
-            ]
-            
-            let baseStringSize = "\(mainTemperature)".count
-
-            let attributedString = NSMutableAttributedString(string: "\(mainTemperature)°C", attributes: baseAttributes)
-            attributedString.addAttributes(unitAttributes, range: NSRange(location: baseStringSize, length: 2))
-            
-            mainTemperatureLabel.attributedText = attributedString
+            mainTemperatureLabel.text = "\(mainTemperature)"
+        }
+    }
+    
+    public var temperatureUnit: TemperatureUnit = .celcius {
+        didSet {
+            mainUnitLabel.text = temperatureUnit.rawValue
         }
     }
     
