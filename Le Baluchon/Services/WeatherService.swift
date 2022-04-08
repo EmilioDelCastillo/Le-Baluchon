@@ -6,13 +6,12 @@
 //
 
 import Foundation
+import CoreLocation
 
 class WeatherService {
-    private let session: URLSession
     private let baseService: BaseService
     
     init(session: URLSession = URLSession.shared) {
-        self.session = session
         baseService = BaseService(session: session)
     }
     
@@ -30,7 +29,19 @@ class WeatherService {
         }
     }
     
-    private func getLocation(from name: String) async throws -> Location {
+    public func getWeather(latitude: CLLocationDegrees, longitude: CLLocationDegrees) async throws -> Weather {
+        do {
+            let url = URLFactory.weather(latitude: latitude, longitude: longitude)
+            
+            let weather: Weather = try await baseService.fetchData(from: url)
+            return weather
+            
+        } catch {
+            throw error
+        }
+    }
+    
+    public func getLocation(from name: String) async throws -> Location {
         
         let url = URLFactory.geo(for: name, limit: 1)
         

@@ -6,8 +6,9 @@
 //
 
 import UIKit
+import CoreLocation
 
-final class WeatherViewController: UIViewController, UITextFieldDelegate {
+final class WeatherViewController: UIViewController {
     
     @IBOutlet weak var cityField: UITextField!
     @IBOutlet weak var spinner: UIActivityIndicatorView!
@@ -15,11 +16,24 @@ final class WeatherViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var weatherModuleBottom: WeatherModule!
     
     let weatherService = WeatherService()
+    var locationManager: CLLocationManager!
+    
     override var preferredStatusBarStyle: UIStatusBarStyle { .lightContent }
     
     override func viewDidLoad() {
         cityField.delegate = self
-        loadAndSetWeather(for: "New York", in: weatherModuleTop)
+        weatherModuleBottom.delegate = self
+        
+        // TODO: Remove magic numbers (New York coordinates)
+        loadAndSetWeather(for: Location(lat: 40.712784, lon: -74.005941), in: weatherModuleTop)
+        
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager = CLLocationManager()
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
+            locationManager.requestWhenInUseAuthorization()
+            locationManager.startUpdatingLocation()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -31,17 +45,13 @@ final class WeatherViewController: UIViewController, UITextFieldDelegate {
     /// - Parameters:
     ///   - city: The name of the city whose weather will be loaded.
     ///   - module: The module who whill display the weather data.
-    private func loadAndSetWeather(for city: String, in module: WeatherModule) {
+    func loadAndSetWeather(for location: Location, in module: WeatherModule) {
         Task {
             do {
-                let weather = try await weatherService.getWeather(city: city)
+                let weather = try await weatherService.getWeather(latitude: location.lat,
+                                                                  longitude: location.lon)
                 
-                module.cityName = weather.cityName
-                module.mainTemperature = weather.temp
-                module.humidity = weather.humidity
-                module.pressure = weather.pressure
-                module.minMax = (weather.tempMin, weather.tempMax)
-                module.windSpeed = weather.windSpeed
+                set(weather: weather, in: module)
             }
             catch WeatherServiceError.cityNotFound {
                 spinner.stopAnimating()
@@ -58,25 +68,31 @@ final class WeatherViewController: UIViewController, UITextFieldDelegate {
                 present(createAlert(title: "Error", message: "Network error."), animated: true)
             }
         }
-        
-        
     }
     
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        guard let text = textField.text, !text.isEmpty else {
-            return false
-        }
-        Task {
-            do {
-                spinner.startAnimating()
-                loadAndSetWeather(for: text, in: weatherModuleBottom)
-                spinner.stopAnimating()
-            }
-        }
-        return false
+    /// Fills the weather fields in the weather module with the given data.
+    /// - Parameters:
+    ///   - weather: The weather data.
+    ///   - module: The module in which to load the data.
+    private func set(weather: Weather, in module: WeatherModule) {
+        module.cityName = weather.cityName
+        module.mainTemperature = weather.temp
+        
+        //TODO: Configuration de l'utilisateur pour l'unité
+        module.temperatureUnit = .celcius
+        
+        module.humidity = weather.humidity
+        module.pressure = weather.pressure
+        module.minMax = (weather.tempMin, weather.tempMax)
+        module.windSpeed = weather.windSpeed
     }
     
-    private func createAlert(title: String, message: String) -> UIAlertController {
+    /// Creates a simple UIAlertController object with the given title and message and an "OK" button.
+    /// - Parameters:
+    ///   - title: The title of the alert.
+    ///   - message: The message of the alert.
+    /// - Returns: The aforementioned UIAlertController.
+    func createAlert(title: String, message: String) -> UIAlertController {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         return alert
