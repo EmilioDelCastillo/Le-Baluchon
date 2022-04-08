@@ -1,0 +1,46 @@
+{
+    "coord": {
+        "lon": -0.5516,
+        "lat": 47.474
+    },
+    "weather": [
+        {
+            "id": 802,
+            "main": "Clouds",
+            "description": "scattered clouds",
+            "icon": "03n"
+        }
+    ],
+    "base": "stations",
+    "main": {
+        "temp": 10.8,
+        "feels_like": 9.56,
+        "temp_min": 9.02,
+        "temp_max": 12.35,
+        "pressure": 1003,
+        "humidity": 85,
+        "sea_level": 1003,
+        "grnd_level": 999
+    },
+    "visibility": 10000,
+    "wind": {
+        "speed": 3.79,
+        "deg": 341,
+        "gust": 8.98
+    },
+    "clouds": {
+        "all": 37
+    },
+    "dt": 1648666073,
+    "sys": {
+        "type": 2,
+        "id": 2032547,
+        "country": "FR",
+        "sunrise": 1648619115,
+        "sunset": 1648664874
+    },
+    "timezone": 7200,
+    "id": 3037656,
+    "name": "Angers",
+    "cod": 200
+}

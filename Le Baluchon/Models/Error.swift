@@ -19,4 +19,5 @@ enum BaseServiceError: Error {
 
 enum WeatherServiceError: Error {
     case cityNotFound
+    case wrongUrl(url: URL)
 }

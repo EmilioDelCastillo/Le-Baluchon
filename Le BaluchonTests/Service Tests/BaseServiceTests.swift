@@ -38,10 +38,8 @@ class BaseServiceTests: XCTestCase {
             let _: TestType = try await self.subject.fetchData(from: dummyURL)
             XCTFail("Didn't throw")
             
-        } catch BaseServiceError.networkError {
-            // success
         } catch {
-            XCTFail("Unexpected error: \(error)")
+            // success
         }
     }
     
