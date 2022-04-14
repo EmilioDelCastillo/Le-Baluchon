@@ -60,3 +60,9 @@ extension WeatherViewController: WeatherModuleDelegete {
         present(viewControllerToPresent, animated: true)
     }
 }
+
+extension WeatherViewController: WeatherSettingsViewControllerDelegate {
+    func didUpdateSettings() {
+        loadAndSetWeather(for: Location(lat: 40.712784, lon: -74.005941), in: weatherModuleTop)
+    }
+}

@@ -21,6 +21,7 @@ final class WeatherViewController: UIViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle { .lightContent }
     
     override func viewDidLoad() {
+        super.viewDidLoad()
         cityField.delegate = self
         weatherModuleBottom.delegate = self
         
