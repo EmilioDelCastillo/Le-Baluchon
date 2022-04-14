@@ -66,9 +66,14 @@ class WeatherModule: UIView {
         }
     }
     
-    public var temperatureUnit: TemperatureUnit = .celcius {
+    public var temperatureUnit: TemperatureUnit = .Celcius {
         didSet {
-            mainUnitLabel.text = temperatureUnit.rawValue
+            switch temperatureUnit {
+            case .Celcius:
+                mainUnitLabel.text = "°C"
+            case .Fahrenheit:
+                mainUnitLabel.text = "°F"
+            }
         }
     }
     

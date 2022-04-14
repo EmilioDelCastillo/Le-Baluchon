@@ -19,10 +19,27 @@ struct Location: Decodable {
 struct Weather: Decodable {
     
     let weather: [WeatherItem]
-    let temp: Int
-    let feelsLike: Int
-    let tempMin: Int
-    let tempMax: Int
+    private let internalTemp: Double
+    /// The temperature value according to the UserDefaults setting.
+    var temp: Int {
+        get { convertTemperatureToUserUnit(internalTemp) }
+    }
+    
+    private let internalFeelsLike: Double
+    var feelsLike: Int {
+        get { convertTemperatureToUserUnit(internalFeelsLike)}
+    }
+    
+    var tempMin: Int {
+        get { convertTemperatureToUserUnit(internalTempMin) }
+    }
+    private let internalTempMin: Double
+    
+    var tempMax: Int {
+        get { convertTemperatureToUserUnit(internalTempMax) }
+    }
+    private let internalTempMax: Double
+    
     let pressure: Int
     let humidity: Int
     let cityName: String
@@ -52,16 +69,31 @@ struct Weather: Decodable {
         let windContainer = try outerContainer.nestedContainer(keyedBy: WindKeys.self, forKey: .wind)
         
         self.weather = try outerContainer.decode([WeatherItem].self, forKey: .weather)
-        self.temp = try mainContainer.decode(Double.self, forKey: .temp).roundedToInt
-        self.feelsLike = try mainContainer.decode(Double.self, forKey: .feelsLike).roundedToInt
-        self.tempMin = try mainContainer.decode(Double.self, forKey: .tempMin).roundedToInt
-        self.tempMax = try mainContainer.decode(Double.self, forKey: .tempMax).roundedToInt
+        self.internalTemp = try mainContainer.decode(Double.self, forKey: .temp)
+        self.internalFeelsLike = try mainContainer.decode(Double.self, forKey: .feelsLike)
+        self.internalTempMin = try mainContainer.decode(Double.self, forKey: .tempMin)
+        self.internalTempMax = try mainContainer.decode(Double.self, forKey: .tempMax)
         self.pressure = try mainContainer.decode(Int.self, forKey: .pressure)
         self.humidity = try mainContainer.decode(Int.self, forKey: .humidity)
         self.cityName = try outerContainer.decode(String.self, forKey: .name)
         self.windSpeed = try windContainer.decode(Double.self, forKey: .speed).roundedToInt
     }
     
+    private func convertTemperatureToUserUnit(_ temperature: Double) -> Int {
+        let input = Measurement(value: temperature, unit: UnitTemperature.kelvin)
+        let output: Double
+        
+        let temperatureUnit = UserDefaults.temperatureUnit
+        switch temperatureUnit {
+        case .Celcius:
+            output = input.converted(to: .celsius).value
+            
+        case .Fahrenheit:
+            output = input.converted(to: .fahrenheit).value
+        }
+            
+        return output.roundedToInt
+    }
 }
 
 struct WeatherItem: Decodable {
@@ -72,6 +104,10 @@ struct WeatherItem: Decodable {
 }
 
 enum TemperatureUnit: String {
-    case celcius = "°C"
-    case farenheit = "°F"
+    case Celcius
+    case Fahrenheit
+}
+
+enum UnitSystem: String {
+    case metric, imperial
 }

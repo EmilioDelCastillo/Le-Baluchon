@@ -68,7 +68,6 @@ public struct URLFactory {
     static func weather(latitude: Double, longitude: Double) -> URL {
         URLFactory(path: "data/2.5/weather", queryItems: [URLQueryItem(name: "lat", value: latitude.string),
                                                           URLQueryItem(name: "lon", value: longitude.string),
-                                                          URLQueryItem(name: "appid", value: API_KEY),
-                                                          URLQueryItem(name: "units", value: "metric")]).url
+                                                          URLQueryItem(name: "appid", value: API_KEY)]).url
     }
 }

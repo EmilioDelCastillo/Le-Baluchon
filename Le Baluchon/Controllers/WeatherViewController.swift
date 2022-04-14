@@ -78,8 +78,8 @@ final class WeatherViewController: UIViewController {
         module.cityName = weather.cityName
         module.mainTemperature = weather.temp
         
-        //TODO: Configuration de l'utilisateur pour l'unité
-        module.temperatureUnit = .celcius
+        let temperatureUnit = UserDefaults.temperatureUnit
+        module.temperatureUnit = temperatureUnit
         
         module.humidity = weather.humidity
         module.pressure = weather.pressure
