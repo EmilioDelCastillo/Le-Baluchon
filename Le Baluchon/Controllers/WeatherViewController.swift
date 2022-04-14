@@ -76,16 +76,7 @@ final class WeatherViewController: UIViewController {
     ///   - weather: The weather data.
     ///   - module: The module in which to load the data.
     private func set(weather: Weather, in module: WeatherModule) {
-        module.cityName = weather.cityName
-        module.mainTemperature = weather.temp
-        
-        let temperatureUnit = UserDefaults.temperatureUnit
-        module.temperatureUnit = temperatureUnit
-        
-        module.humidity = weather.humidity
-        module.pressure = weather.pressure
-        module.minMax = (weather.tempMin, weather.tempMax)
-        module.windSpeed = weather.windSpeed
+        module.weather = weather
     }
     
     /// Creates a simple UIAlertController object with the given title and message and an "OK" button.

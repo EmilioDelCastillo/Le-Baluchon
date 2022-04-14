@@ -32,15 +32,10 @@ struct SettingsMenuOption {
     let menuOptions: [UIMenuElement]
 }
 
-protocol WeatherSettingsViewControllerDelegate: AnyObject {
-    func didUpdateSettings()
-}
-
 class WeatherSettingsViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var options = [SettingOptionsType]()
-    weak var delegate: WeatherSettingsViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,34 +49,34 @@ class WeatherSettingsViewController: UIViewController {
             .menu(model: SettingsMenuOption(title: "Temperature unit",
                                             icon: UIImage(systemName: "thermometer"),
                                             menuOptions: [
-                                                UIAction(title: TemperatureUnit.Celcius.rawValue) { [weak self] _ in
+                                                UIAction(title: TemperatureUnit.Celcius.rawValue) { _ in
                                                     UserDefaults.temperatureUnit = .Celcius
-                                                    self?.delegate?.didUpdateSettings()
+                                                    NotificationCenter.temperatureUnitChanged()
                                                 },
-                                                UIAction(title: TemperatureUnit.Fahrenheit.rawValue) { [weak self] _ in
+                                                UIAction(title: TemperatureUnit.Fahrenheit.rawValue) { _ in
                                                     UserDefaults.temperatureUnit = .Fahrenheit
-                                                    self?.delegate?.didUpdateSettings()
+                                                    NotificationCenter.temperatureUnitChanged()
                                                 }
                                             ])),
             
             .menu(model: SettingsMenuOption(title: "Default units",
                                             icon: UIImage(systemName: "globe.europe.africa"),
                                             menuOptions: [
-                                                UIAction(title: "Metric") { [weak self] _ in
+                                                UIAction(title: "Metric") { _ in
                                                     UserDefaults.unitSystem = .metric
-                                                    self?.delegate?.didUpdateSettings()
+                                                    
                                                 },
-                                                UIAction(title: "Imperial") { [weak self] _ in
+                                                UIAction(title: "Imperial") { _ in
                                                     UserDefaults.unitSystem = .imperial
-                                                    self?.delegate?.didUpdateSettings()
+                                                    
                                                 }
                                             ])),
         
             .plain(model: SettingsOption(title: "Default city",
                                          icon: UIImage(systemName: "mappin.and.ellipse"),
-                                         handler: { [weak self] in
+                                         handler: {
                                              print("Something something default location")
-                                             self?.delegate?.didUpdateSettings()
+                                             
                                          }))
         ]
     }

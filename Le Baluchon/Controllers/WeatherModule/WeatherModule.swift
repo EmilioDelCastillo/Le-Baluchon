@@ -38,6 +38,11 @@ class WeatherModule: UIView {
         contentView.frame = bounds
         contentView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         addSubview(contentView)
+        NotificationCenter.default.addObserver(self, selector: #selector(loadWeather), name: LeBaluchonNotification.temperatureUnitChanged, object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: LeBaluchonNotification.temperatureUnitChanged, object: nil)
     }
     
     @IBInspectable
@@ -59,52 +64,30 @@ class WeatherModule: UIView {
     
     public weak var delegate: WeatherModuleDelegete?
     
-    /// The number part of the displayed temperature
-    public var mainTemperature: Int = 0 {
+    public var weather: Weather? {
         didSet {
-            mainTemperatureLabel.text = "\(mainTemperature)"
+            loadWeather()
         }
     }
     
-    public var temperatureUnit: TemperatureUnit = .Celcius {
-        didSet {
-            switch temperatureUnit {
-            case .Celcius:
-                mainUnitLabel.text = "°C"
-            case .Fahrenheit:
-                mainUnitLabel.text = "°F"
-            }
+    @objc func loadWeather() {
+        guard let weather = weather else {
+            return
         }
-    }
-    
-    public var windSpeed: Int! {
-        didSet {
-            windLabel.text = "\(windSpeed * 36 / 10) km/h"
+
+        mainTemperatureLabel.text = "\(weather.temp)"
+        switch UserDefaults.temperatureUnit {
+        case .Celcius:
+            mainUnitLabel.text = "°C"
+        case .Fahrenheit:
+            mainUnitLabel.text = "°F"
         }
-    }
-    
-    public var humidity: Int! {
-        didSet {
-            humidityLabel.text = "\(humidity!) %"
-        }
-    }
-    
-    public var pressure: Int! {
-        didSet {
-            pressureLabel.text = "\(pressure!) hPa"
-        }
-    }
-    
-    public var minMax: (Int, Int)! {
-        didSet {
-            minMaxLabel.text = "min : \(minMax.0)° | max : \(minMax.1)°"
-        }
-    }
-    
-    public var cityName: String! {
-        didSet {
-            cityNameLabel.text = cityName
-        }
+        
+        windLabel.text = "\(weather.windSpeed * 36 / 10) km/h"
+        humidityLabel.text = "\(weather.humidity) %"
+        pressureLabel.text = "\(weather.pressure) hPa"
+        minMaxLabel.text = "min : \(weather.tempMin)° | max : \(weather.tempMax)°"
+        cityNameLabel.text = weather.cityName
     }
     
     @IBAction func openSettings(_ sender: UIButton) {
