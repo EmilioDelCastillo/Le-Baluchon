@@ -70,47 +70,7 @@ class WeatherSettingsViewController: UIViewController {
                                                     UserDefaults.unitSystem = .imperial
                                                     
                                                 }
-                                            ])),
-        
-            .plain(model: SettingsOption(title: "Default city",
-                                         icon: UIImage(systemName: "mappin.and.ellipse")) { [weak self] in
-                                             let cityPrompt = UIAlertController(title: "Enter the default city.",
-                                                                                message: "Leave empty to use your current location.",
-                                                                                preferredStyle: .alert)
-                                             
-                                             let setCity = UIAlertAction(title: "OK", style: .default) { _ in
-                                                 guard let answer = cityPrompt.textFields?[0], let text = answer.text else { return }
-                                                 if text.isEmpty {
-                                                     UserDefaults.defaultLocation = .current
-                                                 } else {
-                                                     let trimmedText = text.trimmingCharacters(in: .whitespacesAndNewlines)
-                                                     let capitalizedText = trimmedText.prefix(1).capitalized + trimmedText.dropFirst()
-                                                     UserDefaults.defaultLocation = .custom(capitalizedText)
-                                                 }
-                                                 self?.tableView.reloadData()
-                                                 NotificationCenter.weatherSettingsChanged()
-                                             }
-                                             
-                                             let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in
-                                                 cityPrompt.dismiss(animated: true)
-                                             }
-                                             
-                                             cityPrompt.addTextField()
-                                             let textfield = cityPrompt.textFields?[0]
-                                             textfield?.placeholder = "Current location"
-                                             textfield?.clearButtonMode = .always
-                                             
-                                             switch UserDefaults.defaultLocation {
-                                             case .current:
-                                                 break
-                                             case .custom(let customLocation):
-                                                 textfield?.text = customLocation
-                                             }
-                                             
-                                             cityPrompt.addAction(setCity)
-                                             cityPrompt.addAction(cancelAction)
-                                             self?.present(cityPrompt, animated: true)
-                                         })
+                                            ]))
         ]
     }
 }
@@ -124,19 +84,8 @@ extension WeatherSettingsViewController: UITableViewDelegate, UITableViewDataSou
         let model = options[indexPath.row]
         
         switch model {
-        case .plain(model: let model):
+        case .plain(_):
             let cell = tableView.dequeueReusableCell(withIdentifier: "labelCell", for: indexPath) as! SettingsTableViewCell
-            cell.iconImageView.image = model.icon
-            cell.label.text = model.title
-            
-            switch UserDefaults.defaultLocation {
-            case .current:
-                cell.valueLabel.text = "Current Location"
-                
-            case .custom(let customLocation):
-                cell.valueLabel.text = customLocation
-            }
-            
             return cell
             
         case .menu(model: let model):

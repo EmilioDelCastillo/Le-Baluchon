@@ -9,13 +9,14 @@ import UIKit
 
 @objc protocol WeatherModuleDelegete {
     @objc optional func didOpenSettings()
+    @objc optional func didChangeCityName(to city: String)
 }
 
 @IBDesignable
 class WeatherModule: UIView {
     @IBOutlet private weak var contentView: UIView!
     @IBOutlet private weak var minMaxLabel: UILabel!
-    @IBOutlet private weak var cityNameLabel: UILabel!
+    @IBOutlet private weak var cityNameTextField: UITextField!
     @IBOutlet private weak var humidityLabel: UILabel!
     @IBOutlet private weak var pressureLabel: UILabel!
     @IBOutlet private weak var windLabel: UILabel!
@@ -38,6 +39,12 @@ class WeatherModule: UIView {
         contentView.frame = bounds
         contentView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         addSubview(contentView)
+        
+        cityNameTextField.delegate = self
+        cityNameTextField.attributedPlaceholder = NSAttributedString(string: "Current city", attributes: [
+            .foregroundColor: UIColor.systemGray
+        ])
+        
         NotificationCenter.default.addObserver(self, selector: #selector(loadWeather), name: LeBaluchonNotification.weatherSettingsChanged, object: nil)
     }
     
@@ -59,6 +66,8 @@ class WeatherModule: UIView {
     public var editable: Bool = false {
         didSet {
             editButton?.isHidden = !editable
+            cityNameTextField?.borderStyle = editable ? .roundedRect : .none
+            cityNameTextField?.isEnabled = editable
         }
     }
     
@@ -87,11 +96,19 @@ class WeatherModule: UIView {
         humidityLabel.text = "\(weather.humidity) %"
         pressureLabel.text = "\(weather.pressure) hPa"
         minMaxLabel.text = "min : \(weather.tempMin)° | max : \(weather.tempMax)°"
-        cityNameLabel.text = weather.cityName
+        cityNameTextField.text = weather.cityName
     }
     
     @IBAction func openSettings(_ sender: UIButton) {
         delegate?.didOpenSettings?()
     }
     
+}
+
+extension WeatherModule: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        delegate?.didChangeCityName?(to: textField.text ?? "")
+        return true
+    }
 }
