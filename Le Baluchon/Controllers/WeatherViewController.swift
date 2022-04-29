@@ -69,7 +69,12 @@ final class WeatherViewController: UIViewController {
                 }
                 catch WeatherServiceError.cityNotFound {
                     spinner.stopAnimating()
-                    present(createAlert(title: "Error", message: "We could not find your city."), animated: true)
+                    let alert = createAlert(title: "Error", message: "We could not find your city.")
+                    alert.addAction(UIAlertAction(title: "Use current location", style: .default, handler: { [weak self] _ in
+                        UserDefaults.defaultLocation = .current
+                        self?.loadUserWeather()
+                    }))
+                    present(alert, animated: true)
                     
                 }
                 catch BaluchonError.missingConfig {
