@@ -10,9 +10,10 @@ extension UserDefaults {
     private enum Keys {
         static let temperatureUnit = "temperatureUnit"
         static let unitSystem = "unitSystem"
+        static let defaultLocation = "defaultLocation"
     }
     
-    class var temperatureUnit: TemperatureUnit {
+    public class var temperatureUnit: TemperatureUnit {
         get {
             if let string = UserDefaults.standard.string(forKey: Keys.temperatureUnit)  {
                 return TemperatureUnit(rawValue: string) ?? .Celcius
@@ -24,7 +25,7 @@ extension UserDefaults {
         }
     }
     
-    class var unitSystem: UnitSystem {
+    public class var unitSystem: UnitSystem {
         get {
             if let string = UserDefaults.standard.string(forKey: Keys.unitSystem) {
                 return UnitSystem(rawValue: string) ?? .metric
@@ -33,6 +34,22 @@ extension UserDefaults {
         }
         set {
             UserDefaults.standard.set(newValue.rawValue, forKey: Keys.unitSystem)
+        }
+    }
+    
+    public class var defaultLocation: DefaultLocation {
+        get {
+            if let string = UserDefaults.standard.data(forKey: Keys.defaultLocation) {
+                let decoder = PropertyListDecoder()
+                let result = try? decoder.decode(DefaultLocation.self, from: string)
+                return result ?? .current
+            }
+            return .current
+        }
+        set {
+            let test = PropertyListEncoder()
+            let data = try! test.encode(newValue)
+            UserDefaults.standard.set(data, forKey: Keys.defaultLocation)
         }
     }
 }

@@ -87,26 +87,18 @@
                                     </view>
                                 </subviews>
                             </stackView>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="City name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YEM-dv-OWk">
-                                <rect key="frame" x="160.5" y="687" width="93" height="34"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" spellCheckingType="no" textContentType="name"/>
-                            </textField>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ec0-do-F1Z"/>
                         <color key="backgroundColor" name="Background"/>
                         <constraints>
                             <constraint firstItem="w7L-49-YLw" firstAttribute="leading" secondItem="ec0-do-F1Z" secondAttribute="leading" constant="20" id="UzX-9e-y63"/>
-                            <constraint firstItem="YEM-dv-OWk" firstAttribute="top" secondItem="w7L-49-YLw" secondAttribute="bottom" constant="32" id="aFd-G5-bRo"/>
                             <constraint firstItem="w7L-49-YLw" firstAttribute="centerX" secondItem="ec0-do-F1Z" secondAttribute="centerX" id="bNx-4x-NZO"/>
-                            <constraint firstItem="YEM-dv-OWk" firstAttribute="centerX" secondItem="wnJ-WP-Tyk" secondAttribute="centerX" id="cfd-M9-SZA"/>
                             <constraint firstItem="ec0-do-F1Z" firstAttribute="trailing" secondItem="w7L-49-YLw" secondAttribute="trailing" constant="20" id="uSk-hb-J9w"/>
                             <constraint firstItem="w7L-49-YLw" firstAttribute="top" secondItem="ec0-do-F1Z" secondAttribute="top" constant="30" id="zex-Vx-AUI"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item 1" selectedImage="cloud.sun.fill" catalog="system" id="bCN-1r-PLb"/>
                     <connections>
-                        <outlet property="cityField" destination="YEM-dv-OWk" id="Aaf-ua-a8B"/>
                         <outlet property="spinner" destination="kak-9w-COf" id="L2B-8o-Ei5"/>
                         <outlet property="weatherModuleBottom" destination="bco-4a-q6s" id="BTz-hw-u9B"/>
                         <outlet property="weatherModuleTop" destination="x7l-8D-wkl" id="TS3-Vc-s6K"/>

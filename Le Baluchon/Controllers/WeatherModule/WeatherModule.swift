@@ -38,11 +38,11 @@ class WeatherModule: UIView {
         contentView.frame = bounds
         contentView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         addSubview(contentView)
-        NotificationCenter.default.addObserver(self, selector: #selector(loadWeather), name: LeBaluchonNotification.temperatureUnitChanged, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(loadWeather), name: LeBaluchonNotification.weatherSettingsChanged, object: nil)
     }
     
     deinit {
-        NotificationCenter.default.removeObserver(self, name: LeBaluchonNotification.temperatureUnitChanged, object: nil)
+        NotificationCenter.default.removeObserver(self, name: LeBaluchonNotification.weatherSettingsChanged, object: nil)
     }
     
     @IBInspectable

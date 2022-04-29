@@ -8,43 +8,15 @@
 import UIKit
 import CoreLocation
 
-extension WeatherViewController: UITextFieldDelegate, CLLocationManagerDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        guard let text = textField.text, !text.isEmpty else {
-            return false
-        }
-        Task {
-            do {
-                spinner.startAnimating()
-                let location = try await weatherService.getLocation(from: text)
-                loadAndSetWeather(for: location, in: weatherModuleBottom)
-                spinner.stopAnimating()
-            }
-            catch WeatherServiceError.cityNotFound {
-                spinner.stopAnimating()
-                present(createAlert(title: "Error", message: "We could not find your city."), animated: true)
-                
-            }
-            catch BaluchonError.missingConfig {
-                spinner.stopAnimating()
-                present(createAlert(title: "Error", message: "An error occurred."), animated: true)
-                
-            }
-            catch BaseServiceError.networkError {
-                spinner.stopAnimating()
-                present(createAlert(title: "Error", message: "Network error."), animated: true)
-            }
-        }
-        return false
-    }
+extension WeatherViewController: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let location = locations.last!
-        let test = Location(name: "",
+        let currentLocation = Location(name: "",
                             lat: location.coordinate.latitude,
                             lon: location.coordinate.longitude,
                             country: "")
-        loadAndSetWeather(for: test, in: weatherModuleBottom)
+        loadAndSetWeather(for: currentLocation, in: weatherModuleBottom)
     }
 }
 

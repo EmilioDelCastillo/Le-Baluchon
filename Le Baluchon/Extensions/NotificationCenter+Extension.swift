@@ -8,7 +8,7 @@
 import Foundation
 
 extension NotificationCenter {
-    static func temperatureUnitChanged() {
-        NotificationCenter.default.post(name: LeBaluchonNotification.temperatureUnitChanged, object: nil)
+    public static func weatherSettingsChanged() {
+        NotificationCenter.default.post(name: LeBaluchonNotification.weatherSettingsChanged, object: nil)
     }
 }

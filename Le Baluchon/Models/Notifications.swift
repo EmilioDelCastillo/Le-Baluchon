@@ -8,5 +8,5 @@
 import Foundation
 
 struct LeBaluchonNotification {
-    static let temperatureUnitChanged = Notification.Name(rawValue: "com.raahs.app.lebaluchon.temperatureUnit")
+    static let weatherSettingsChanged = Notification.Name(rawValue: "com.raahs.app.lebaluchon.weatherSettings")
 }

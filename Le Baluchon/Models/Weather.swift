@@ -42,7 +42,7 @@ struct Weather: Decodable {
     
     let pressure: Int
     let humidity: Int
-    let cityName: String
+    var cityName: String
     let windSpeed: Int
     
     enum OuterKeys: String, CodingKey {
@@ -103,11 +103,47 @@ struct WeatherItem: Decodable {
     var icon: String
 }
 
-enum TemperatureUnit: String {
+public enum TemperatureUnit: String {
     case Celcius
     case Fahrenheit
 }
 
-enum UnitSystem: String {
+public enum UnitSystem: String {
     case metric, imperial
+}
+
+public enum DefaultLocation: Codable {
+    case current
+    case custom(_: String)
+    
+    private enum CodingKeys: CodingKey {
+        case current, custom
+    }
+    
+    enum PostTypeCodingError: Error {
+        case decoding(String)
+    }
+
+    public init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        if let _ = try? values.decode(String.self, forKey: .current) {
+            self = .current
+            return
+        }
+        if let value = try? values.decode(String.self, forKey: .custom) {
+            self = .custom(value)
+            return
+        }
+        throw PostTypeCodingError.decoding("Whoops! \(dump(values))")
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        switch self {
+        case .current:
+            try container.encode("custom", forKey: .current)
+        case .custom(let value):
+            try container.encode(value, forKey: .custom)
+        }
+    }
 }

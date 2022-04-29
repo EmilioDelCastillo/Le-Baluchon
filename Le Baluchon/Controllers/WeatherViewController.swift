@@ -10,7 +10,6 @@ import CoreLocation
 
 final class WeatherViewController: UIViewController {
     
-    @IBOutlet weak var cityField: UITextField!
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     @IBOutlet weak var weatherModuleTop: WeatherModule!
     @IBOutlet weak var weatherModuleBottom: WeatherModule!
@@ -22,19 +21,20 @@ final class WeatherViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        cityField.delegate = self
         weatherModuleBottom.delegate = self
         
         // TODO: Remove magic numbers (New York coordinates)
         loadAndSetWeather(for: Location(lat: 40.712784, lon: -74.005941), in: weatherModuleTop)
-        
-        if CLLocationManager.locationServicesEnabled() {
-            locationManager = CLLocationManager()
-            locationManager.delegate = self
-            locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
-            locationManager.requestWhenInUseAuthorization()
-            locationManager.startUpdatingLocation()
-        }
+        loadUserWeather()
+        NotificationCenter.default.addObserver(self, selector: #selector(loadUserWeather),
+                                               name: LeBaluchonNotification.weatherSettingsChanged,
+                                               object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self,
+                                                  name: LeBaluchonNotification.weatherSettingsChanged,
+                                                  object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -42,9 +42,47 @@ final class WeatherViewController: UIViewController {
         setNeedsStatusBarAppearanceUpdate()
     }
     
+    @objc func loadUserWeather() {
+        switch UserDefaults.defaultLocation {
+        case .current:
+            if CLLocationManager.locationServicesEnabled() {
+                locationManager = CLLocationManager()
+                locationManager.delegate = self
+                locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
+                locationManager.requestWhenInUseAuthorization()
+                locationManager.startUpdatingLocation()
+            }
+            
+        case .custom(let customLocation):
+            Task {
+                do {
+                    spinner.startAnimating()
+                    let location = try await weatherService.getLocation(from: customLocation)
+                    loadAndSetWeather(for: location, in: weatherModuleBottom)
+                    spinner.stopAnimating()
+                }
+                catch WeatherServiceError.cityNotFound {
+                    spinner.stopAnimating()
+                    present(createAlert(title: "Error", message: "We could not find your city."), animated: true)
+                    
+                }
+                catch BaluchonError.missingConfig {
+                    spinner.stopAnimating()
+                    present(createAlert(title: "Error", message: "An error occurred."), animated: true)
+                    
+                }
+                catch BaseServiceError.networkError {
+                    spinner.stopAnimating()
+                    present(createAlert(title: "Error", message: "Network error."), animated: true)
+                }
+            }
+        }
+        
+    }
+    
     /// Loads the weather data for the given city in the given module.
     /// - Parameters:
-    ///   - city: The name of the city whose weather will be loaded.
+    ///   - location: The location of the city whose weather will be loaded.
     ///   - module: The module who whill display the weather data.
     func loadAndSetWeather(for location: Location, in module: WeatherModule) {
         Task {
@@ -76,7 +114,28 @@ final class WeatherViewController: UIViewController {
     ///   - weather: The weather data.
     ///   - module: The module in which to load the data.
     private func set(weather: Weather, in module: WeatherModule) {
-        module.weather = weather
+        switch module {
+        case weatherModuleTop:
+            module.weather = weather
+            
+        case weatherModuleBottom:
+            switch UserDefaults.defaultLocation {
+            case .current:
+                module.weather = weather
+                
+            case .custom(let customLocation):
+                // This ensures that the name given by the user is the same that is displayed.
+                // Sometimes the fetched locations will give a different name for the same place
+                // when the coordinates are provided.
+                var newWeather = weather
+                newWeather.cityName = customLocation
+                module.weather = newWeather
+            }
+            
+        default:
+            preconditionFailure("The given module has not been implemented.")
+        }
+        
     }
     
     /// Creates a simple UIAlertController object with the given title and message and an "OK" button.
