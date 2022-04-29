@@ -11,4 +11,7 @@ extension NotificationCenter {
     public static func weatherSettingsChanged() {
         NotificationCenter.default.post(name: LeBaluchonNotification.weatherSettingsChanged, object: nil)
     }
+    public static func weatherCityChanged() {
+        NotificationCenter.default.post(name: LeBaluchonNotification.weatherCityChanged, object: nil)
+    }
 }

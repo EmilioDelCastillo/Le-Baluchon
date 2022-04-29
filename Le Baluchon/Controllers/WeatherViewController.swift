@@ -29,11 +29,17 @@ final class WeatherViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(loadUserWeather),
                                                name: LeBaluchonNotification.weatherSettingsChanged,
                                                object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(loadUserWeather),
+                                               name: LeBaluchonNotification.weatherCityChanged,
+                                               object: nil)
     }
     
     deinit {
         NotificationCenter.default.removeObserver(self,
                                                   name: LeBaluchonNotification.weatherSettingsChanged,
+                                                  object: nil)
+        NotificationCenter.default.removeObserver(self,
+                                                  name: LeBaluchonNotification.weatherCityChanged,
                                                   object: nil)
     }
     

@@ -34,6 +34,6 @@ extension WeatherViewController: WeatherModuleDelegete {
     
     func didChangeCityName(to city: String) {
         UserDefaults.defaultLocation = city.isEmpty ? .current : .custom(city)
-        NotificationCenter.weatherSettingsChanged()
+        NotificationCenter.weatherCityChanged()
     }
 }

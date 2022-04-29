@@ -9,4 +9,5 @@ import Foundation
 
 struct LeBaluchonNotification {
     static let weatherSettingsChanged = Notification.Name(rawValue: "com.raahs.app.lebaluchon.weatherSettings")
+    static let weatherCityChanged = Notification.Name(rawValue: "com.raahs.app.lebaluchon.weatherCity")
 }
