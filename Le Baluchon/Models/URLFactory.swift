@@ -22,7 +22,6 @@ fileprivate struct Config {
 
 /// This struct computes the different urls needed to fetch data from the APIs.
 public struct URLFactory {
-    private static let API_KEY = "c74f9b5c951acb64e5a0068b10c14769"
     
     private(set) var path: String
     private(set) var queryItems = [URLQueryItem]()
@@ -57,7 +56,7 @@ public struct URLFactory {
     static func geo(for cityName: String, limit: Int) -> URL {
         URLFactory(path: "geo/1.0/direct", queryItems: [URLQueryItem(name: "q", value: cityName),
                                                         URLQueryItem(name: "limit", value: String(limit)),
-                                                        URLQueryItem(name: "appid", value: API_KEY)]).url
+                                                                        URLQueryItem(name: "appid", value: APIKeys.weather)]).url
     }
     
     /// Returns the url for retriving the weather data from a place.
@@ -68,6 +67,6 @@ public struct URLFactory {
     static func weather(latitude: Double, longitude: Double) -> URL {
         URLFactory(path: "data/2.5/weather", queryItems: [URLQueryItem(name: "lat", value: latitude.string),
                                                           URLQueryItem(name: "lon", value: longitude.string),
-                                                          URLQueryItem(name: "appid", value: API_KEY)]).url
+                                                          URLQueryItem(name: "appid", value: APIKeys.weather)]).url
     }
 }
