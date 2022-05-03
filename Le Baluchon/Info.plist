@@ -21,8 +21,15 @@
 			</array>
 		</dict>
 	</dict>
-	<key>BASE_HOST</key>
-	<string>api.openweathermap.org</string>
+	<key>BASE_HOSTS</key>
+	<dict>
+		<key>WEATHER</key>
+		<string>api.openweathermap.org</string>
+		<key>CURRENCY</key>
+		<string>data.fixer.io/api</string>
+		<key>TRANSLATION</key>
+		<string></string>
+	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Get the local weather</string>
 </dict>
