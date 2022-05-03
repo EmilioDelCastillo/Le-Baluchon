@@ -14,18 +14,93 @@
         <!--Currency-->
         <scene sceneID="4cQ-ZV-ZNY">
             <objects>
-                <viewController id="7aU-AG-x4E" userLabel="Currency" sceneMemberID="viewController">
+                <viewController id="7aU-AG-x4E" userLabel="Currency" customClass="CurrencyViewController" customModule="Le_Baluchon" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fkI-Z2-iE5">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yWb-Mx-mBE" userLabel="Source">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="179"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="1" placeholder="1000" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RZU-AP-lOn" userLabel="Source Input TextField">
+                                        <rect key="frame" x="282" y="96.5" width="72" height="38.5"/>
+                                        <color key="backgroundColor" name="Background Light"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numberPad" enablesReturnKeyAutomatically="YES"/>
+                                    </textField>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="€" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yI2-Di-r1n" userLabel="Output currency Label">
+                                        <rect key="frame" x="60" y="97.5" width="19.5" height="37"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" name="Background Light"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="RZU-AP-lOn" secondAttribute="trailing" constant="60" id="Agf-Ej-yDl"/>
+                                    <constraint firstItem="yI2-Di-r1n" firstAttribute="leading" secondItem="yWb-Mx-mBE" secondAttribute="leading" constant="60" id="X7O-C8-Pql"/>
+                                    <constraint firstAttribute="bottom" secondItem="RZU-AP-lOn" secondAttribute="bottom" constant="44" id="ct6-hu-v8Y"/>
+                                    <constraint firstItem="yI2-Di-r1n" firstAttribute="centerY" secondItem="RZU-AP-lOn" secondAttribute="centerY" id="vrs-VY-249"/>
+                                    <constraint firstItem="RZU-AP-lOn" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="yI2-Di-r1n" secondAttribute="trailing" constant="10" id="wLf-o2-ymX"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q0B-vD-kVx" userLabel="Target">
+                                <rect key="frame" x="0.0" y="179" width="414" height="717"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="att-BB-TYm" userLabel="Output currency Label">
+                                        <rect key="frame" x="60" y="44" width="19.5" height="37"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SGc-f3-BEG" customClass="NumpadModule" customModule="Le_Baluchon" customModuleProvider="target">
+                                        <rect key="frame" x="20" y="89" width="374" height="537.5"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    </view>
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="1,0512" placeholder="1000" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7zl-ay-dWE" userLabel="Output TextField">
+                                        <rect key="frame" x="263" y="44" width="91" height="37"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                    </textField>
+                                </subviews>
+                                <color key="backgroundColor" name="Background"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="7zl-ay-dWE" secondAttribute="trailing" constant="60" id="344-Lk-qtz"/>
+                                    <constraint firstAttribute="trailing" secondItem="SGc-f3-BEG" secondAttribute="trailing" constant="20" symbolic="YES" id="IiT-mz-2bb"/>
+                                    <constraint firstItem="SGc-f3-BEG" firstAttribute="leading" secondItem="Q0B-vD-kVx" secondAttribute="leading" constant="20" symbolic="YES" id="KD5-n8-0GS"/>
+                                    <constraint firstItem="att-BB-TYm" firstAttribute="leading" secondItem="Q0B-vD-kVx" secondAttribute="leading" constant="60" id="ggg-y1-iAd"/>
+                                    <constraint firstItem="7zl-ay-dWE" firstAttribute="top" secondItem="Q0B-vD-kVx" secondAttribute="top" constant="44" id="jSM-1P-X9H"/>
+                                    <constraint firstItem="SGc-f3-BEG" firstAttribute="top" secondItem="7zl-ay-dWE" secondAttribute="bottom" constant="8" symbolic="YES" id="lIB-z5-KUD"/>
+                                    <constraint firstItem="7zl-ay-dWE" firstAttribute="centerY" secondItem="att-BB-TYm" secondAttribute="centerY" id="mCr-1r-8In"/>
+                                    <constraint firstItem="7zl-ay-dWE" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="att-BB-TYm" secondAttribute="trailing" constant="10" id="rij-Nd-sre"/>
+                                    <constraint firstAttribute="bottom" secondItem="SGc-f3-BEG" secondAttribute="bottom" constant="90.5" id="uhR-8U-WMc"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="Yd5-5y-u75"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="yWb-Mx-mBE" firstAttribute="top" secondItem="fkI-Z2-iE5" secondAttribute="top" id="MrW-V6-0Og"/>
+                            <constraint firstItem="yWb-Mx-mBE" firstAttribute="leading" secondItem="Yd5-5y-u75" secondAttribute="leading" id="X2i-TX-ONH"/>
+                            <constraint firstItem="Q0B-vD-kVx" firstAttribute="leading" secondItem="Yd5-5y-u75" secondAttribute="leading" id="X9B-ZW-rfT"/>
+                            <constraint firstItem="Q0B-vD-kVx" firstAttribute="trailing" secondItem="Yd5-5y-u75" secondAttribute="trailing" id="dGV-sB-lYP"/>
+                            <constraint firstItem="yWb-Mx-mBE" firstAttribute="trailing" secondItem="Yd5-5y-u75" secondAttribute="trailing" id="hsu-a6-1t5"/>
+                            <constraint firstItem="Q0B-vD-kVx" firstAttribute="top" secondItem="yWb-Mx-mBE" secondAttribute="bottom" id="lpd-Tn-Vff"/>
+                            <constraint firstItem="yWb-Mx-mBE" firstAttribute="height" secondItem="fkI-Z2-iE5" secondAttribute="height" multiplier="1/5" id="oKi-Ph-BNo"/>
+                            <constraint firstAttribute="bottom" secondItem="Q0B-vD-kVx" secondAttribute="bottom" id="ymL-k5-bWC"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item 2" id="vSU-Wo-FpP"/>
+                    <connections>
+                        <outlet property="inputTextField" destination="RZU-AP-lOn" id="IE1-3v-8CC"/>
+                        <outlet property="numpadModule" destination="SGc-f3-BEG" id="fNP-zR-ZVv"/>
+                        <outlet property="outputTextField" destination="7zl-ay-dWE" id="yIN-E9-3tN"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ohq-G8-m9l" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="522" y="258"/>
+            <point key="canvasLocation" x="521.73913043478262" y="257.8125"/>
         </scene>
         <!--Translator-->
         <scene sceneID="n0d-zv-y5j">

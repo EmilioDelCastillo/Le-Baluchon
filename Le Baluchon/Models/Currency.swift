@@ -12,4 +12,10 @@ public struct Currency: Codable {
     var timestamp: Int?
     var date: String?
     var rates: [String: Double]?
+    
+    public func convert(from euro: Double) -> Double {
+        guard let rates = rates,
+              let USDRate = rates["USD"] else { return 0 }
+        return euro * USDRate
+    }
 }
