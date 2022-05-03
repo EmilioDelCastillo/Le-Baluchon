@@ -21,3 +21,7 @@ enum WeatherServiceError: Error {
     case cityNotFound
     case wrongUrl(url: URL)
 }
+
+enum CurrencyServiceError: Error {
+    case fetchError
+}

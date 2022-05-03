@@ -11,6 +11,7 @@ extension UserDefaults {
         static let temperatureUnit = "temperatureUnit"
         static let unitSystem = "unitSystem"
         static let defaultLocation = "defaultLocation"
+        static let currency = "currency"
     }
     
     public class var temperatureUnit: TemperatureUnit {
@@ -39,17 +40,36 @@ extension UserDefaults {
     
     public class var defaultLocation: DefaultLocation {
         get {
-            if let string = UserDefaults.standard.data(forKey: Keys.defaultLocation) {
+            if let data = UserDefaults.standard.data(forKey: Keys.defaultLocation) {
                 let decoder = PropertyListDecoder()
-                let result = try? decoder.decode(DefaultLocation.self, from: string)
+                let result = try? decoder.decode(DefaultLocation.self, from: data)
                 return result ?? .current
             }
             return .current
         }
         set {
-            let test = PropertyListEncoder()
-            let data = try! test.encode(newValue)
+            let encoder = PropertyListEncoder()
+            let data = try! encoder.encode(newValue)
             UserDefaults.standard.set(data, forKey: Keys.defaultLocation)
+        }
+    }
+    
+    public class var currencyRate: Currency? {
+        get {
+            if let data = UserDefaults.standard.data(forKey: Keys.currency) {
+                let decoder = PropertyListDecoder()
+                let result = try? decoder.decode(Currency.self, from: data)
+                return result
+            }
+            return nil
+        }
+        set {
+            guard let unwrappedValue = newValue else {
+                return
+            }
+            let encoder = PropertyListEncoder()
+            let data = try! encoder.encode(unwrappedValue)
+            UserDefaults.standard.set(data, forKey: Keys.currency)
         }
     }
 }

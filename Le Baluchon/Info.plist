@@ -26,11 +26,22 @@
 		<key>WEATHER</key>
 		<string>api.openweathermap.org</string>
 		<key>CURRENCY</key>
-		<string>data.fixer.io/api</string>
+		<string>data.fixer.io</string>
 		<key>TRANSLATION</key>
 		<string></string>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Get the local weather</string>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSExceptionDomains</key>
+		<dict>
+			<key>data.fixer.io</key>
+			<dict>
+				<key>NSExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+			</dict>
+		</dict>
+	</dict>
 </dict>
 </plist>

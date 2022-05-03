@@ -44,7 +44,7 @@ public struct URLFactory {
     
     var url: URL {
         var components = URLComponents()
-        components.scheme = "https"
+        components.scheme = urlType == .currency ? "http" : "https"
         components.host = Config.baseUrl(for: urlType)
         components.path = "/" + path
         components.queryItems = queryItems
@@ -71,9 +71,10 @@ public struct URLFactory {
     ///   - limit: The number of possible matches.
     /// - Returns: The built url from the given parameters.
     static func geo(for cityName: String, limit: Int) -> URL {
-        URLFactory(type: .weather, path: "geo/1.0/direct", queryItems: [URLQueryItem(name: "q", value: cityName),
-                                                        URLQueryItem(name: "limit", value: String(limit)),
-                                                                        URLQueryItem(name: "appid", value: APIKeys.weather)]).url
+        URLFactory(type: .weather, path: "geo/1.0/direct", queryItems: [
+            URLQueryItem(name: "q", value: cityName),
+            URLQueryItem(name: "limit", value: String(limit)),
+            URLQueryItem(name: "appid", value: APIKeys.weather)]).url
     }
     
     /// Returns the url for retriving the weather data from a place.
@@ -82,8 +83,19 @@ public struct URLFactory {
     ///   - longitude: The longitude coordinate.
     /// - Returns: The built url from the given parameters.
     static func weather(latitude: Double, longitude: Double) -> URL {
-        URLFactory(type: .weather, path: "data/2.5/weather", queryItems: [URLQueryItem(name: "lat", value: latitude.string),
-                                                          URLQueryItem(name: "lon", value: longitude.string),
-                                                          URLQueryItem(name: "appid", value: APIKeys.weather)]).url
+        URLFactory(type: .weather, path: "data/2.5/weather", queryItems: [
+            URLQueryItem(name: "lat", value: latitude.string),
+            URLQueryItem(name: "lon", value: longitude.string),
+            URLQueryItem(name: "appid", value: APIKeys.weather)]).url
+    }
+}
+
+//MARK: - Currency
+extension URLFactory {
+    static func currency() -> URL {
+        URLFactory(type: .currency, path: "api/latest", queryItems: [
+            URLQueryItem(name: "access_key", value: APIKeys.currency),
+            URLQueryItem(name: "symbols", value: "USD")
+        ]).url
     }
 }
