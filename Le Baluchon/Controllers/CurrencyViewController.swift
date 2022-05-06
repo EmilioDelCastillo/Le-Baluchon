@@ -15,6 +15,7 @@ class CurrencyViewController: UIViewController, UITextFieldDelegate {
     
     private let service = CurrencyService()
     private var currency: Currency?
+    private let formatter = NumberFormatter()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +32,7 @@ class CurrencyViewController: UIViewController, UITextFieldDelegate {
         inputTextField.delegate = self
         outputTextField.delegate = self
         numpadModule.delegate = self
+        formatter.maximumFractionDigits = 3
         
         let gesture = UISwipeGestureRecognizer(target: self, action: #selector(deleteCharacter))
         gesture.direction = [.left]
@@ -39,12 +41,11 @@ class CurrencyViewController: UIViewController, UITextFieldDelegate {
     
     /// Updates the label with the converted value.
     private func updateOutputLabel() {
-        guard let text = inputTextField.text,
-              let value = Double(text)
-        else { return }
+        guard let text = inputTextField.text else { return }
+        let value = Double(text)
         
-        let convertedValue = currency?.convert(from: value)
-        outputTextField.text = convertedValue?.string
+        guard let convertedValue = currency?.convert(from: value ?? 1) as? NSNumber else { return }
+        outputTextField.text = formatter.string(from: convertedValue)
     }
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
