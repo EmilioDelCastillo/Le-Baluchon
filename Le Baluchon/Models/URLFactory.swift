@@ -64,7 +64,10 @@ public struct URLFactory {
         self.path = path
         self.queryItems = queryItems
     }
-    
+}
+
+//MARK: - Weather
+extension URLFactory {
     /// Returns the url for retrieving the coordinates from the name of a place.
     /// - Parameters:
     ///   - cityName: The searched name.

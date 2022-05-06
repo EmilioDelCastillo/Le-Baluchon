@@ -35,7 +35,9 @@ class NumpadModule: UIView {
         addSubview(contentView)
         
         for (index, element) in buttons.enumerated() {
-            element.setTitle(index.string, for: .normal)
+            element.setAttributedTitle(
+                NSAttributedString(string: index.string, attributes: [.font: UIFont(name: "AppleSDGothicNeo-Thin", size: 40)!]),
+                for: .normal)
             element.addTarget(self, action: #selector(didPressButton(sender:)), for: .touchUpInside)
         }
     }
