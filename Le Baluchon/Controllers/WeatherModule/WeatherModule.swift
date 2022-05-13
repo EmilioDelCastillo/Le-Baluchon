@@ -10,6 +10,8 @@ import UIKit
 @objc protocol WeatherModuleDelegete {
     @objc optional func didOpenSettings()
     @objc optional func didChangeCityName(to city: String)
+    @objc optional func didBeginEditing(_ sender: UITextField)
+    @objc optional func didEndEditing(_ sender: UITextField)
 }
 
 @IBDesignable
@@ -110,5 +112,13 @@ extension WeatherModule: UITextFieldDelegate {
         textField.resignFirstResponder()
         delegate?.didChangeCityName?(to: textField.text ?? "")
         return true
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        delegate?.didBeginEditing?(textField)
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        delegate?.didEndEditing?(textField)
     }
 }

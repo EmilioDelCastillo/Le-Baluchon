@@ -17,6 +17,7 @@ final class WeatherViewController: UIViewController {
     
     let weatherService = WeatherService()
     var locationManager: CLLocationManager!
+    var isEditingCity = false
     
     override var preferredStatusBarStyle: UIStatusBarStyle { .lightContent }
     

@@ -11,6 +11,9 @@ import CoreLocation
 extension WeatherViewController: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        // Prevent the module from being updated while it's being edited.
+        guard isEditingCity == false else { return }
+        
         let location = locations.last!
         let currentLocation = Location(name: "",
                             lat: location.coordinate.latitude,
@@ -36,4 +39,13 @@ extension WeatherViewController: WeatherModuleDelegete {
         UserDefaults.defaultLocation = city.isEmpty ? .current : .custom(city)
         NotificationCenter.weatherCityChanged()
     }
+    
+    func didBeginEditing(_ sender: UITextField) {
+        isEditingCity = true
+    }
+    
+    func didEndEditing(_ sender: UITextField) {
+        isEditingCity = false
+    }
+    
 }
