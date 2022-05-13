@@ -10,6 +10,7 @@ import CoreLocation
 
 final class WeatherViewController: UIViewController {
     
+    @IBOutlet weak var containerStackView: UIStackView!
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     @IBOutlet weak var weatherModuleTop: WeatherModule!
     @IBOutlet weak var weatherModuleBottom: WeatherModule!
@@ -32,6 +33,7 @@ final class WeatherViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(loadUserWeather),
                                                name: LeBaluchonNotification.weatherCityChanged,
                                                object: nil)
+        containerStackView.bottomAnchor.constraint(greaterThanOrEqualTo: view.keyboardLayoutGuide.topAnchor, constant: -20).isActive = true
     }
     
     deinit {
