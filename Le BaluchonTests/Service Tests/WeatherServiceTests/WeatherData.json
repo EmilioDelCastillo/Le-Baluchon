@@ -13,12 +13,12 @@
     ],
     "base": "stations",
     "main": {
-        "temp": 10.8,
-        "feels_like": 9.56,
-        "temp_min": 9.02,
-        "temp_max": 12.35,
-        "pressure": 1003,
-        "humidity": 85,
+        "temp": 282.55,
+        "feels_like": 281.86,
+        "temp_min": 280.37,
+        "temp_max": 284.26,
+        "pressure": 1023,
+        "humidity": 100,
         "sea_level": 1003,
         "grnd_level": 999
     },

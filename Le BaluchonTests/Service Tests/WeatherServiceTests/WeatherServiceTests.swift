@@ -40,12 +40,12 @@ class WeatherServiceTests: XCTestCase {
         do {
             let weather = try await subject.getWeather(city: "Angers")
             
-            XCTAssertEqual(weather.temp, 11)
-            XCTAssertEqual(weather.feelsLike, 10)
-            XCTAssertEqual(weather.tempMin, 9)
-            XCTAssertEqual(weather.tempMax, 12)
-            XCTAssertEqual(weather.pressure, 1003)
-            XCTAssertEqual(weather.humidity, 85)
+            XCTAssertEqual(weather.temp, 9)
+            XCTAssertEqual(weather.feelsLike, 9)
+            XCTAssertEqual(weather.tempMin, 7)
+            XCTAssertEqual(weather.tempMax, 11)
+            XCTAssertEqual(weather.pressure, 1023)
+            XCTAssertEqual(weather.humidity, 100)
             XCTAssertEqual(weather.windSpeed, 4)
             XCTAssertEqual(weather.cityName, "Angers")
         } catch {
