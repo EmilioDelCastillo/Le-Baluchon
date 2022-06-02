@@ -149,7 +149,6 @@ final class WeatherViewController: UIViewController {
         default:
             preconditionFailure("The given module has not been implemented.")
         }
-        
     }
     
     /// Creates a simple UIAlertController object with the given title and message and an "OK" button.

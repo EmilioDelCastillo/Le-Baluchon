@@ -93,7 +93,7 @@
                             <constraint firstAttribute="bottom" secondItem="Q0B-vD-kVx" secondAttribute="bottom" id="ymL-k5-bWC"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item 2" selectedImage="dollarsign.square" catalog="system" id="vSU-Wo-FpP"/>
+                    <tabBarItem key="tabBarItem" title="" image="dollarsign.square" catalog="system" id="vSU-Wo-FpP"/>
                     <connections>
                         <outlet property="inputTextField" destination="RZU-AP-lOn" id="IE1-3v-8CC"/>
                         <outlet property="numpadModule" destination="SGc-f3-BEG" id="fNP-zR-ZVv"/>
@@ -197,7 +197,7 @@
                             <constraint firstItem="yFH-OR-2S0" firstAttribute="top" secondItem="PJd-vB-2ro" secondAttribute="top" constant="10" id="pdj-yi-APj"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item 2" selectedImage="character.bubble.ja" catalog="system" id="RqN-RZ-jVf"/>
+                    <tabBarItem key="tabBarItem" title="" image="character.bubble.ja" catalog="system" id="RqN-RZ-jVf"/>
                     <connections>
                         <outlet property="sourceTextField" destination="1od-5Q-47F" id="YAA-yQ-x26"/>
                         <outlet property="targetTextField" destination="sXe-jB-LDm" id="1Tj-qU-u8x"/>
@@ -262,7 +262,7 @@
                             <constraint firstItem="w7L-49-YLw" firstAttribute="top" relation="lessThanOrEqual" secondItem="ec0-do-F1Z" secondAttribute="top" constant="30" id="zex-Vx-AUI"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item 1" selectedImage="cloud.sun.fill" catalog="system" id="bCN-1r-PLb"/>
+                    <tabBarItem key="tabBarItem" title="" image="cloud.sun" catalog="system" id="bCN-1r-PLb"/>
                     <connections>
                         <outlet property="containerStackView" destination="w7L-49-YLw" id="VOd-1d-LSC"/>
                         <outlet property="spinner" destination="kak-9w-COf" id="L2B-8o-Ei5"/>
@@ -485,7 +485,7 @@
     </scenes>
     <resources>
         <image name="character.bubble.ja" catalog="system" width="128" height="110"/>
-        <image name="cloud.sun.fill" catalog="system" width="128" height="95"/>
+        <image name="cloud.sun" catalog="system" width="128" height="95"/>
         <image name="dollarsign.square" catalog="system" width="128" height="114"/>
         <image name="questionmark.app" catalog="system" width="128" height="114"/>
         <namedColor name="Background">
