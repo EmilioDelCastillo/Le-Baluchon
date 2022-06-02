@@ -28,7 +28,7 @@
 		<key>CURRENCY</key>
 		<string>data.fixer.io</string>
 		<key>TRANSLATION</key>
-		<string></string>
+		<string>api-free.deepl.com</string>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Get the local weather</string>
