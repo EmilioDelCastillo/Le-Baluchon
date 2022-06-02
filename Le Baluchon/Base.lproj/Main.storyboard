@@ -93,7 +93,7 @@
                             <constraint firstAttribute="bottom" secondItem="Q0B-vD-kVx" secondAttribute="bottom" id="ymL-k5-bWC"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item 2" id="vSU-Wo-FpP"/>
+                    <tabBarItem key="tabBarItem" title="Item 2" selectedImage="dollarsign.square" catalog="system" id="vSU-Wo-FpP"/>
                     <connections>
                         <outlet property="inputTextField" destination="RZU-AP-lOn" id="IE1-3v-8CC"/>
                         <outlet property="numpadModule" destination="SGc-f3-BEG" id="fNP-zR-ZVv"/>
@@ -107,18 +107,105 @@
         <!--Translator-->
         <scene sceneID="n0d-zv-y5j">
             <objects>
-                <viewController id="PAf-ie-2P1" userLabel="Translator" sceneMemberID="viewController">
+                <viewController id="PAf-ie-2P1" userLabel="Translator" customClass="TranslationViewController" customModule="Le_Baluchon" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="NNs-nD-gVQ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Translate" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yFH-OR-2S0">
+                                <rect key="frame" x="147" y="54" width="120.5" height="37"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                <color key="textColor" red="0.79215686269999996" green="1" blue="0.81568627449999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="MN8-oy-xbg">
+                                <rect key="frame" x="30" y="156" width="354" height="301"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q4V-tT-JT4" userLabel="Source content view">
+                                        <rect key="frame" x="0.0" y="0.0" width="354" height="140"/>
+                                        <subviews>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Bonjour" translatesAutoresizingMaskIntoConstraints="NO" id="1od-5Q-47F">
+                                                <rect key="frame" x="5" y="5" width="344" height="130"/>
+                                                <color key="backgroundColor" name="Background Light"/>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            </textView>
+                                        </subviews>
+                                        <color key="backgroundColor" name="Background Light"/>
+                                        <color key="tintColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="1od-5Q-47F" secondAttribute="trailing" constant="5" id="4dv-Ir-cpp"/>
+                                            <constraint firstItem="1od-5Q-47F" firstAttribute="top" secondItem="Q4V-tT-JT4" secondAttribute="top" constant="5" id="62e-7K-FFr"/>
+                                            <constraint firstItem="1od-5Q-47F" firstAttribute="leading" secondItem="Q4V-tT-JT4" secondAttribute="leading" constant="5" id="6wa-Ek-Yfm"/>
+                                            <constraint firstAttribute="bottom" secondItem="1od-5Q-47F" secondAttribute="bottom" constant="5" id="yDE-Gd-18a"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dc9-xW-MDO" userLabel="Separator view">
+                                        <rect key="frame" x="0.0" y="150" width="354" height="1"/>
+                                        <color key="backgroundColor" name="Background Lighter"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1" id="t2x-jA-nob"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BMu-oQ-23J" userLabel="Target content view">
+                                        <rect key="frame" x="0.0" y="161" width="354" height="140"/>
+                                        <subviews>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Hello" translatesAutoresizingMaskIntoConstraints="NO" id="sXe-jB-LDm">
+                                                <rect key="frame" x="5" y="5" width="344" height="130"/>
+                                                <color key="backgroundColor" name="Background Light"/>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            </textView>
+                                        </subviews>
+                                        <color key="backgroundColor" name="Background Light"/>
+                                        <color key="tintColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstItem="sXe-jB-LDm" firstAttribute="leading" secondItem="BMu-oQ-23J" secondAttribute="leading" constant="5" id="5jB-CX-M2g"/>
+                                            <constraint firstAttribute="bottom" secondItem="sXe-jB-LDm" secondAttribute="bottom" constant="5" id="O50-fz-mth"/>
+                                            <constraint firstItem="sXe-jB-LDm" firstAttribute="top" secondItem="BMu-oQ-23J" secondAttribute="top" constant="5" id="b8n-Yg-v3Y"/>
+                                            <constraint firstAttribute="trailing" secondItem="sXe-jB-LDm" secondAttribute="trailing" constant="5" id="xdp-PC-HDd"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="Dc9-xW-MDO" firstAttribute="centerY" secondItem="MN8-oy-xbg" secondAttribute="centerY" id="GXF-EW-SwL"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="PJd-vB-2ro"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" name="Background"/>
+                        <constraints>
+                            <constraint firstItem="MN8-oy-xbg" firstAttribute="top" secondItem="yFH-OR-2S0" secondAttribute="bottom" constant="65" id="2b4-8a-Yy7"/>
+                            <constraint firstItem="yFH-OR-2S0" firstAttribute="centerX" secondItem="PJd-vB-2ro" secondAttribute="centerX" id="Aqs-cm-0Qu"/>
+                            <constraint firstItem="MN8-oy-xbg" firstAttribute="leading" secondItem="PJd-vB-2ro" secondAttribute="leading" constant="30" id="Bgh-Bh-GdR"/>
+                            <constraint firstItem="PJd-vB-2ro" firstAttribute="bottom" secondItem="MN8-oy-xbg" secondAttribute="bottom" constant="356" id="Rnb-qx-OA6"/>
+                            <constraint firstItem="PJd-vB-2ro" firstAttribute="trailing" secondItem="MN8-oy-xbg" secondAttribute="trailing" constant="30" id="UNu-1m-udt"/>
+                            <constraint firstItem="yFH-OR-2S0" firstAttribute="top" secondItem="PJd-vB-2ro" secondAttribute="top" constant="10" id="pdj-yi-APj"/>
+                        </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item 2" id="RqN-RZ-jVf"/>
+                    <tabBarItem key="tabBarItem" title="Item 2" selectedImage="character.bubble.ja" catalog="system" id="RqN-RZ-jVf"/>
+                    <connections>
+                        <outlet property="sourceTextField" destination="1od-5Q-47F" id="YAA-yQ-x26"/>
+                        <outlet property="targetTextField" destination="sXe-jB-LDm" id="1Tj-qU-u8x"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pnh-7b-kq5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1380" y="-141"/>
+            <point key="canvasLocation" x="1378.2608695652175" y="-141.29464285714286"/>
         </scene>
         <!--Weather-->
         <scene sceneID="oby-8j-8A7">
@@ -397,7 +484,9 @@
         </scene>
     </scenes>
     <resources>
+        <image name="character.bubble.ja" catalog="system" width="128" height="110"/>
         <image name="cloud.sun.fill" catalog="system" width="128" height="95"/>
+        <image name="dollarsign.square" catalog="system" width="128" height="114"/>
         <image name="questionmark.app" catalog="system" width="128" height="114"/>
         <namedColor name="Background">
             <color red="0.048999998718500137" green="0.093000002205371857" blue="0.13099999725818634" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
