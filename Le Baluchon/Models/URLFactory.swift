@@ -111,7 +111,7 @@ extension URLFactory {
     ///   - source: The source language code. Optional.
     ///   - target: The target language code.
     /// - Returns: The built URL from the given parameters.
-    static func translate(text: String, from source: String?, to target: String) -> URL {
+    static func translate(text: String, from source: String? = nil, to target: String) -> URL {
         URLFactory(type: .translation, path: "v2/translate", queryItems: [
             URLQueryItem(name: "auth_key", value: APIKeys.translation),
             URLQueryItem(name: "source_lang", value: source),

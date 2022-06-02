@@ -10,7 +10,6 @@ import XCTest
 
 class WeatherServiceTests: XCTestCase {
     private var subject: WeatherService!
-    private var session = MockURLProtocol()
     
     override func setUp() {
         super.setUp()
@@ -27,7 +26,7 @@ class WeatherServiceTests: XCTestCase {
         let weatherData = getData(name: "WeatherData")
         
         MockURLProtocol.requestHandler = { request in
-            let response = HTTPURLResponse(url: request.url!, statusCode: 20, httpVersion: nil, headerFields: nil)!
+            let response = HTTPURLResponse(url: request.url!, statusCode: 200, httpVersion: nil, headerFields: nil)!
             if response.url == URLFactory.geo(for: "Angers", limit: 1) {
                 return (response, geoData)
             } else if response.url == URLFactory.weather(latitude: 47.4739884, longitude: -0.5515588) {

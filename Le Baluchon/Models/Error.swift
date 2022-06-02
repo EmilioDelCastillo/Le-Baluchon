@@ -25,3 +25,7 @@ enum WeatherServiceError: Error {
 enum CurrencyServiceError: Error {
     case fetchError
 }
+
+enum TranslationServiceError: Error {
+    case translationError
+}

@@ -10,8 +10,7 @@ import Foundation
 public struct Currency: Codable {
     var success: Bool
     var timestamp: Int?
-    var date: String?
-    var rates: [String: Double]?
+    private var rates: [String: Double]?
     
     public func convert(from euro: Double) -> Double {
         guard let rates = rates,

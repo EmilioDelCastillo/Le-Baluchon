@@ -16,9 +16,9 @@ class CurrencyService {
     
     /// Returns the current rate, from cache if it isn't older than a day, from the API otherwise.
     /// - Returns: A `Currency` object with up-to-date values.
-    public func getCurrentRate() async throws -> Currency {
+    public func getCurrentRate(cached: Bool = true) async throws -> Currency {
         // Try to get the rate from disk, if it isn't older than a day.
-        if let cachedCurrencyRate = UserDefaults.currencyRate,
+        if cached, let cachedCurrencyRate = UserDefaults.currencyRate,
            let timestamp = cachedCurrencyRate.timestamp {
             
             let cachedDate = Date(timeIntervalSince1970: Double(timestamp))
