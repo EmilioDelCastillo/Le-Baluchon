@@ -17,7 +17,7 @@ enum BaseServiceError: Error {
     case internalError
 }
 
-enum WeatherServiceError: Error {
+enum WeatherServiceError: Error, Equatable {
     case cityNotFound
     case wrongUrl(url: URL)
 }
