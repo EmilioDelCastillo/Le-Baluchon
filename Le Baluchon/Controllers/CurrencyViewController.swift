@@ -35,7 +35,7 @@ class CurrencyViewController: UIViewController, UITextFieldDelegate {
         formatter.maximumFractionDigits = 3
         
         let gesture = UISwipeGestureRecognizer(target: self, action: #selector(deleteCharacter))
-        gesture.direction = [.left]
+        gesture.direction = [.left, .right]
         inputTextField.addGestureRecognizer(gesture)
     }
     
@@ -64,6 +64,13 @@ extension CurrencyViewController: NumpadModuleDelegate {
     func didPressButton(value: Int, _ sender: UIButton) {
         guard let text = inputTextField.text else { return }
         let newText = text + value.string
+        inputTextField.text = newText
+        updateOutputLabel()
+    }
+    
+    func didPressComma() {
+        guard let text = inputTextField.text, !text.isEmpty, !text.contains(".") else { return }
+        let newText = text + "."
         inputTextField.text = newText
         updateOutputLabel()
     }

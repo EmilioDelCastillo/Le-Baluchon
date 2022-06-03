@@ -223,12 +223,13 @@
                                         <constraint firstAttribute="width" secondItem="gIX-ad-23e" secondAttribute="height" multiplier="1:1" id="BxO-Ok-rgy"/>
                                     </constraints>
                                     <state key="normal" title="Button"/>
-                                    <buttonConfiguration key="configuration" style="plain" title="#" cornerStyle="capsule">
+                                    <buttonConfiguration key="configuration" style="plain" title="#" subtitle="," titlePadding="-20" cornerStyle="capsule" titleAlignment="center">
                                         <backgroundConfiguration key="background" strokeWidth="2" strokeOutset="0.0">
                                             <color key="backgroundColor" name="Background"/>
                                             <color key="strokeColor" name="Detail Orchid"/>
                                         </backgroundConfiguration>
                                         <fontDescription key="titleFontDescription" type="system" pointSize="50"/>
+                                        <fontDescription key="subtitleFontDescription" name="Helvetica" family="Helvetica" pointSize="30"/>
                                         <color key="baseForegroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </buttonConfiguration>
                                 </button>

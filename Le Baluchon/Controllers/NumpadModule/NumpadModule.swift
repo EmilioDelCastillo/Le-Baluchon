@@ -9,6 +9,7 @@ import UIKit
 
 protocol NumpadModuleDelegate: AnyObject {
     func didPressButton(value: Int, _ sender: UIButton)
+    func didPressComma()
 }
 
 @IBDesignable
@@ -39,6 +40,10 @@ class NumpadModule: UIView {
                 NSAttributedString(string: index.string, attributes: [.font: UIFont(name: "AppleSDGothicNeo-Thin", size: 40)!]),
                 for: .normal)
             element.addTarget(self, action: #selector(didPressButton(sender:)), for: .touchUpInside)
+            if index == 0 {
+                let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(didLongPress(sender:)))
+                element.addGestureRecognizer(longPressGesture)
+            }
         }
     }
     
@@ -47,5 +52,9 @@ class NumpadModule: UIView {
               let value = Int(label.text!)
         else { return }
         delegate?.didPressButton(value: value, sender)
+    }
+    
+    @objc private func didLongPress(sender: UIButton) {
+        delegate?.didPressComma()
     }
 }
