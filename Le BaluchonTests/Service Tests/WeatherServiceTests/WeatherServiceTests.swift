@@ -45,7 +45,7 @@ class WeatherServiceTests: XCTestCase {
             XCTAssertEqual(weather.tempMax, 11)
             XCTAssertEqual(weather.pressure, 1023)
             XCTAssertEqual(weather.humidity, 100)
-            XCTAssertEqual(weather.windSpeed, 4)
+            XCTAssertEqual(weather.windSpeed, 14)
             XCTAssertEqual(weather.cityName, "Angers")
         } catch {
             XCTFail("An error was thrown: \(error)")
@@ -97,7 +97,7 @@ class WeatherServiceTests: XCTestCase {
             XCTAssertEqual(weather.tempMax, 11)
             XCTAssertEqual(weather.pressure, 1023)
             XCTAssertEqual(weather.humidity, 100)
-            XCTAssertEqual(weather.windSpeed, 4)
+            XCTAssertEqual(weather.windSpeed, 14)
             XCTAssertEqual(weather.cityName, "Angers")
         } catch {
             XCTFail("An error was thrown: \(error)")
