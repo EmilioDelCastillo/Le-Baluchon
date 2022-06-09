@@ -11,6 +11,7 @@ class TranslationViewController: UIViewController {
     
     @IBOutlet weak var sourceTextField: UITextView!
     @IBOutlet weak var targetTextField: UITextView!
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
     
     let translationService = TranslationService()
     
@@ -25,7 +26,9 @@ extension TranslationViewController: UITextViewDelegate {
     func textViewDidEndEditing(_ textView: UITextView) {
         guard textView == sourceTextField else { return }
         Task {
+            spinner.startAnimating()
             let translation = try await translationService.translate(text: textView.text, to: "EN")
+            spinner.stopAnimating()
             targetTextField.text = translation.text
         }
     }
