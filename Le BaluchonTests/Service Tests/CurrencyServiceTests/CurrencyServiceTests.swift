@@ -90,6 +90,7 @@ class CurrencyServiceTests: XCTestCase {
     
     func testGetCurrencyRateWithFailingData() async {
         let currencyData = getData(name: "CurrencyDataFailing")
+        
         MockURLProtocol.requestHandler = { request in
             let response = HTTPURLResponse(url: request.url!, statusCode: 200, httpVersion: nil, headerFields: nil)!
             
