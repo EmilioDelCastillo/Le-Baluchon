@@ -30,6 +30,7 @@ struct SettingsMenuOption {
     let title: String
     let icon: UIImage?
     let menuOptions: [UIMenuElement]
+    let cellConfiguration: ((_ cell: SettingsMenuTableViewCell) -> ())?
 }
 
 class WeatherSettingsViewController: UIViewController {
@@ -57,20 +58,40 @@ class WeatherSettingsViewController: UIViewController {
                                                     UserDefaults.temperatureUnit = .Fahrenheit
                                                     NotificationCenter.weatherSettingsChanged()
                                                 }
-                                            ])),
+                                            ],
+                                            cellConfiguration: { cell in
+                                                let temperatureUnit = UserDefaults.temperatureUnit
+                                                switch temperatureUnit {
+                                                case .Celcius:
+                                                    cell.updateActionState(actionTitle: TemperatureUnit.Celcius.rawValue)
+                                                case .Fahrenheit:
+                                                    cell.updateActionState(actionTitle: TemperatureUnit.Fahrenheit.rawValue)
+                                                }
+                                            }
+                                           )),
             
             .menu(model: SettingsMenuOption(title: "Default units",
                                             icon: UIImage(systemName: "globe.europe.africa"),
                                             menuOptions: [
-                                                UIAction(title: "Metric") { _ in
-                                                    UserDefaults.unitSystem = .metric
-                                                    
+                                                UIAction(title: UnitSystem.Metric.rawValue) { _ in
+                                                    UserDefaults.unitSystem = .Metric
+                                                    NotificationCenter.weatherSettingsChanged()
                                                 },
-                                                UIAction(title: "Imperial") { _ in
-                                                    UserDefaults.unitSystem = .imperial
-                                                    
+                                                UIAction(title: UnitSystem.Imperial.rawValue) { _ in
+                                                    UserDefaults.unitSystem = .Imperial
+                                                    NotificationCenter.weatherSettingsChanged()
                                                 }
-                                            ]))
+                                            ],
+                                            cellConfiguration: { cell in
+                                                let speedUnit = UserDefaults.unitSystem
+                                                switch speedUnit {
+                                                case .Metric:
+                                                    cell.updateActionState(actionTitle: UnitSystem.Metric.rawValue)
+                                                case .Imperial:
+                                                    cell.updateActionState(actionTitle: UnitSystem.Imperial.rawValue)
+                                                }
+                                            }
+                                           ))
         ]
     }
 }
@@ -93,15 +114,7 @@ extension WeatherSettingsViewController: UITableViewDelegate, UITableViewDataSou
             cell.label.text = model.title
             cell.iconImageView.image = model.icon
             cell.configureMenu(with: model.menuOptions)
-            
-            // Select the correct item in the menu
-            let temperatureUnit = UserDefaults.temperatureUnit
-            switch temperatureUnit {
-            case .Celcius:
-                cell.updateActionState(actionTitle: TemperatureUnit.Celcius.rawValue)
-            case .Fahrenheit:
-                cell.updateActionState(actionTitle: TemperatureUnit.Fahrenheit.rawValue)
-            }
+            model.cellConfiguration?(cell)
             
             return cell
             

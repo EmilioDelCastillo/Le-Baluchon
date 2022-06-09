@@ -29,9 +29,9 @@ extension UserDefaults {
     public class var unitSystem: UnitSystem {
         get {
             if let string = UserDefaults.standard.string(forKey: Keys.unitSystem) {
-                return UnitSystem(rawValue: string) ?? .metric
+                return UnitSystem(rawValue: string) ?? .Metric
             }
-            return .metric
+            return .Metric
         }
         set {
             UserDefaults.standard.set(newValue.rawValue, forKey: Keys.unitSystem)

@@ -43,7 +43,11 @@ struct Weather: Decodable {
     let pressure: Int
     let humidity: Int
     var cityName: String
-    let windSpeed: Int
+    
+    var windSpeed: Int {
+        get { convertSpeedToUserUnit(internalWindSpeed) }
+    }
+    let internalWindSpeed: Int
     
     enum OuterKeys: String, CodingKey {
         case main, weather, name, wind
@@ -76,7 +80,7 @@ struct Weather: Decodable {
         self.pressure = try mainContainer.decode(Int.self, forKey: .pressure)
         self.humidity = try mainContainer.decode(Int.self, forKey: .humidity)
         self.cityName = try outerContainer.decode(String.self, forKey: .name)
-        self.windSpeed = try windContainer.decode(Double.self, forKey: .speed).roundedToInt
+        self.internalWindSpeed = try windContainer.decode(Double.self, forKey: .speed).roundedToInt
     }
     
     private func convertTemperatureToUserUnit(_ temperature: Double) -> Int {
@@ -94,6 +98,20 @@ struct Weather: Decodable {
             
         return output.roundedToInt
     }
+    
+    private func convertSpeedToUserUnit(_ speed: Int) -> Int {
+        let input = Measurement(value: Double(speed), unit: UnitSpeed.metersPerSecond)
+        let output: Double
+        
+        let speedUnit = UserDefaults.unitSystem
+        switch speedUnit {
+        case .Metric:
+            output = input.converted(to: .kilometersPerHour).value
+        case .Imperial:
+            output = input.converted(to: .milesPerHour).value
+        }
+        return output.roundedToInt
+    }
 }
 
 struct WeatherItem: Decodable {
@@ -109,7 +127,7 @@ public enum TemperatureUnit: String {
 }
 
 public enum UnitSystem: String {
-    case metric, imperial
+    case Metric, Imperial
 }
 
 public enum DefaultLocation: Codable {

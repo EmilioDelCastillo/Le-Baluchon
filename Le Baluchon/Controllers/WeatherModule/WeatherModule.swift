@@ -94,7 +94,8 @@ class WeatherModule: UIView {
             mainUnitLabel.text = "°F"
         }
         
-        windLabel.text = "\(weather.windSpeed * 36 / 10) km/h"
+        let speedUnit = UserDefaults.unitSystem == .Metric ? "km/h" : "mph"
+        windLabel.text = "\(weather.windSpeed) \(speedUnit)"
         humidityLabel.text = "\(weather.humidity) %"
         pressureLabel.text = "\(weather.pressure) hPa"
         minMaxLabel.text = "min : \(weather.tempMin)° | max : \(weather.tempMax)°"

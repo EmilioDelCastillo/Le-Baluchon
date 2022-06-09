@@ -25,7 +25,7 @@ class SettingsMenuTableViewCell: SettingsTableViewCell {
         menuButton.menu = menu
     }
     
-    /// Updates the state of the item in the meni with the given title, setting it to `.on`.
+    /// Updates the state of the item in the menu with the given title, setting it to `.on`.
     /// - Parameter actionTitle: The title of the item to update.
     func updateActionState(actionTitle: String) {
         menuButton.menu?.children.forEach {
