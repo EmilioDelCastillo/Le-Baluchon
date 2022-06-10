@@ -25,7 +25,7 @@ final class WeatherViewController: UIViewController {
         super.viewDidLoad()
         weatherModuleBottom.delegate = self
         
-        // TODO: Remove magic numbers (New York coordinates)
+        // New York default coordinates
         loadAndSetWeather(for: Location(lat: 40.712784, lon: -74.005941), in: weatherModuleTop)
         loadUserWeather()
         NotificationCenter.default.addObserver(self, selector: #selector(loadUserWeather),
