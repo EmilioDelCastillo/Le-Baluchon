@@ -8,7 +8,7 @@
 import Foundation
 import CoreLocation
 
-class WeatherService {
+struct WeatherService {
     private let baseService: BaseService
     
     init(session: URLSession = URLSession.shared) {

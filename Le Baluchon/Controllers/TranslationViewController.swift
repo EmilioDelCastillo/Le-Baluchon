@@ -7,13 +7,13 @@
 
 import UIKit
 
-class TranslationViewController: UIViewController {
+final class TranslationViewController: UIViewController {
     
     @IBOutlet weak var sourceTextField: UITextView!
     @IBOutlet weak var targetTextField: UITextView!
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     
-    let translationService = TranslationService()
+    private let translationService = TranslationService()
     
     override func viewDidLoad() {
         super.viewDidLoad()

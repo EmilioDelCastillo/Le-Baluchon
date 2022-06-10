@@ -16,44 +16,44 @@ struct Location: Decodable {
     var state: String?
 }
 
-struct Weather: Decodable {
+public struct Weather: Decodable {
     
-    let weather: [WeatherItem]
+    private let weather: [WeatherItem]
     private let internalTemp: Double
     /// The temperature value according to the UserDefaults setting.
-    var temp: Int {
+    public var temp: Int {
         get { convertTemperatureToUserUnit(internalTemp) }
     }
     
     private let internalFeelsLike: Double
-    var feelsLike: Int {
+    public var feelsLike: Int {
         get { convertTemperatureToUserUnit(internalFeelsLike)}
     }
     
-    var tempMin: Int {
+    private let internalTempMin: Double
+    public var tempMin: Int {
         get { convertTemperatureToUserUnit(internalTempMin) }
     }
-    private let internalTempMin: Double
     
-    var tempMax: Int {
+    private let internalTempMax: Double
+    public var tempMax: Int {
         get { convertTemperatureToUserUnit(internalTempMax) }
     }
-    private let internalTempMax: Double
     
-    let pressure: Int
-    let humidity: Int
-    var cityName: String
-    
-    var windSpeed: Int {
+    private let internalWindSpeed: Int
+    public var windSpeed: Int {
         get { convertSpeedToUserUnit(internalWindSpeed) }
     }
-    let internalWindSpeed: Int
     
-    enum OuterKeys: String, CodingKey {
+    public let pressure: Int
+    public let humidity: Int
+    public var cityName: String
+    
+    private enum OuterKeys: String, CodingKey {
         case main, weather, name, wind
     }
     
-    enum MainKeys: String, CodingKey {
+    private enum MainKeys: String, CodingKey {
         case temp
         case feelsLike
         case tempMin
@@ -62,11 +62,11 @@ struct Weather: Decodable {
         case humidity
     }
     
-    enum WindKeys: String, CodingKey {
+    private enum WindKeys: String, CodingKey {
         case speed
     }
     
-    init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         let outerContainer = try decoder.container(keyedBy: OuterKeys.self)
         
         let mainContainer = try outerContainer.nestedContainer(keyedBy: MainKeys.self, forKey: .main)
@@ -114,7 +114,7 @@ struct Weather: Decodable {
     }
 }
 
-struct WeatherItem: Decodable {
+private struct WeatherItem: Decodable {
     var id: Int
     var main: String
     var description: String
@@ -138,7 +138,7 @@ public enum DefaultLocation: Codable {
         case current, custom
     }
     
-    enum PostTypeCodingError: Error {
+    private enum PostTypeCodingError: Error {
         case decoding(String)
     }
 

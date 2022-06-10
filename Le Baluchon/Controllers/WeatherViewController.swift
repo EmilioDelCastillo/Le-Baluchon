@@ -15,8 +15,8 @@ final class WeatherViewController: UIViewController {
     @IBOutlet weak var weatherModuleTop: WeatherModule!
     @IBOutlet weak var weatherModuleBottom: WeatherModule!
     
-    let weatherService = WeatherService()
-    var locationManager: CLLocationManager!
+    private let weatherService = WeatherService()
+    private var locationManager: CLLocationManager!
     var isEditingCity = false
     
     override var preferredStatusBarStyle: UIStatusBarStyle { .lightContent }
@@ -51,7 +51,7 @@ final class WeatherViewController: UIViewController {
         setNeedsStatusBarAppearanceUpdate()
     }
     
-    @objc func loadUserWeather() {
+    @objc private func loadUserWeather() {
         switch UserDefaults.defaultLocation {
         case .current:
             if CLLocationManager.locationServicesEnabled() {
@@ -156,7 +156,7 @@ final class WeatherViewController: UIViewController {
     ///   - title: The title of the alert.
     ///   - message: The message of the alert.
     /// - Returns: The aforementioned UIAlertController.
-    func createAlert(title: String, message: String) -> UIAlertController {
+    private func createAlert(title: String, message: String) -> UIAlertController {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         return alert

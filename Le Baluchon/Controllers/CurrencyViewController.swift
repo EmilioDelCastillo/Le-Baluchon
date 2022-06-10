@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CurrencyViewController: UIViewController, UITextFieldDelegate {
+final class CurrencyViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var inputTextField: UITextField!
     @IBOutlet weak var outputTextField: UITextField!
@@ -61,14 +61,14 @@ class CurrencyViewController: UIViewController, UITextFieldDelegate {
 }
 
 extension CurrencyViewController: NumpadModuleDelegate {
-    func didPressButton(value: Int, _ sender: UIButton) {
+    public func didPressButton(value: Int, _ sender: UIButton) {
         guard let text = inputTextField.text else { return }
         let newText = text + value.string
         inputTextField.text = newText
         updateOutputLabel()
     }
     
-    func didPressComma() {
+    public func didPressComma() {
         guard let text = inputTextField.text, !text.isEmpty, !text.contains(".") else { return }
         let newText = text + "."
         inputTextField.text = newText

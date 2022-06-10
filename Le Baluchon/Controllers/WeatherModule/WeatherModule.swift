@@ -7,7 +7,7 @@
 
 import UIKit
 
-@objc protocol WeatherModuleDelegete {
+@objc public protocol WeatherModuleDelegete {
     @objc optional func didOpenSettings()
     @objc optional func didChangeCityName(to city: String)
     @objc optional func didBeginEditing(_ sender: UITextField)
@@ -15,7 +15,7 @@ import UIKit
 }
 
 @IBDesignable
-class WeatherModule: UIView {
+public final class WeatherModule: UIView {
     @IBOutlet private weak var contentView: UIView!
     @IBOutlet private weak var minMaxLabel: UILabel!
     @IBOutlet private weak var cityNameTextField: UITextField!
@@ -81,7 +81,7 @@ class WeatherModule: UIView {
         }
     }
     
-    @objc func loadWeather() {
+    @objc private func loadWeather() {
         guard let weather = weather else {
             return
         }
@@ -109,17 +109,17 @@ class WeatherModule: UIView {
 }
 
 extension WeatherModule: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         delegate?.didChangeCityName?(to: textField.text ?? "")
         return true
     }
     
-    func textFieldDidBeginEditing(_ textField: UITextField) {
+    public func textFieldDidBeginEditing(_ textField: UITextField) {
         delegate?.didBeginEditing?(textField)
     }
     
-    func textFieldDidEndEditing(_ textField: UITextField) {
+    public func textFieldDidEndEditing(_ textField: UITextField) {
         delegate?.didEndEditing?(textField)
     }
 }

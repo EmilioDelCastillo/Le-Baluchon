@@ -7,36 +7,36 @@
 
 import UIKit
 
-enum SettingOptionsType {
+public enum SettingOptionsType {
     case plain(model: SettingsOption)
     case menu(model: SettingsMenuOption)
     case `switch`(model: SettingsSwitchOption)
 }
 
-struct SettingsSwitchOption {
+public struct SettingsSwitchOption {
     let title: String
     let icon: UIImage?
     let handler: (() -> ())
     var isOn: Bool
 }
 
-struct SettingsOption {
+public struct SettingsOption {
     let title: String
     let icon: UIImage?
     let handler: (() -> ())
 }
 
-struct SettingsMenuOption {
+public struct SettingsMenuOption {
     let title: String
     let icon: UIImage?
     let menuOptions: [UIMenuElement]
     let cellConfiguration: ((_ cell: SettingsMenuTableViewCell) -> ())?
 }
 
-class WeatherSettingsViewController: UIViewController {
+final class WeatherSettingsViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
-    var options = [SettingOptionsType]()
+    private var options = [SettingOptionsType]()
     
     override func viewDidLoad() {
         super.viewDidLoad()

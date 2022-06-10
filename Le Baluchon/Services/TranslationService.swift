@@ -7,7 +7,7 @@
 
 import Foundation
 
-class TranslationService {
+struct TranslationService {
     private let baseService: BaseService
     
     init (session: URLSession = URLSession.shared) {

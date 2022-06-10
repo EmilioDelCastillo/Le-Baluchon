@@ -7,7 +7,7 @@
 
 import Foundation
 
-class CurrencyService {
+struct CurrencyService {
     private let baseService: BaseService
     
     init(session: URLSession = URLSession.shared) {

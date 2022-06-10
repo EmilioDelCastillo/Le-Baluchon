@@ -7,13 +7,13 @@
 
 import UIKit
 
-protocol NumpadModuleDelegate: AnyObject {
+public protocol NumpadModuleDelegate: AnyObject {
     func didPressButton(value: Int, _ sender: UIButton)
     func didPressComma()
 }
 
 @IBDesignable
-class NumpadModule: UIView {
+public final class NumpadModule: UIView {
     @IBOutlet private weak var contentView: UIView!
     @IBOutlet private var buttons: [UIButton]!
     

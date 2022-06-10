@@ -11,7 +11,7 @@ struct Translations: Decodable {
     let translations: [Translation]
 }
 
-struct Translation: Decodable {
-    let detectedSourceLanguage: String
-    let text: String
+public struct Translation: Decodable {
+    public let detectedSourceLanguage: String
+    public let text: String
 }
