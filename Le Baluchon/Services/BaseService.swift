@@ -16,8 +16,8 @@ struct BaseService {
     }
     
     /// Fetches data from an url.
-    /// The data must be described with the object
-    /// - Returns: An object full of data lmao
+    /// The data must be described with the object.
+    /// - Returns: An object full of data.
     public func fetchData<T: Decodable>(from url: URL) async throws -> T {
 
         do {
